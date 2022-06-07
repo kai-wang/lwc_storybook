@@ -1,0 +1,95 @@
+:root {
+    --color-bg-hero: #e4f2f8;
+    --color-bg-hero-dark: #d5e8f0;
+    --color-bg-section: #ffffff;
+    --color-bg-section-shade: #f4f5f6;
+    --color-bg-footer: #f7f7f7;
+    --color-bg-card: #e4f2f8;
+    --color-bg-search: #f4f5f6;
+    --color-text-link-footer: #707070;
+    --primary-color-blue: #02a0e0;
+    --primary-color-darkblue: #16325c;
+    --primary-color-blue-highlight: #def1fa;
+    --spotlight-bg: #ffffff;
+    --sidebar-width: 250px;
+    --sidebar-width-full: 300px;
+    --border-gray: #eee solid 2px;
+    --card-box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+        0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    --trigger-box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    --nav-box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+
+    /* button colors */
+    --button-color: #ffffff;
+    --button-color-bg: #02a0e0;
+    --button-color-bg-active: #007aac;
+    --button-brand-color-bg: #ff6000;
+    --button-brand-color-bg-active: #df5400;
+}
+
+body {
+    display: grid;
+    justify-content: center;
+    margin: 20px;
+}
+
+.wrapper {
+    width: 900px;
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 3em;
+}
+
+header {
+    width: 200px;
+    justify-self: center;
+}
+
+nav {
+    justify-self: center;
+}
+
+nav ul {
+    display: flex;
+    gap: 2em;
+}
+
+nav ul li a {
+    padding: 12px 20px;
+    font-size: 1.5em;
+    background-color: var(--primary-color-blue-highlight);
+    border-radius: 7px;
+    color: var(--primary-color-blue);
+    text-decoration: none;
+}
+
+html {
+    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial,
+        'Lucida Grande', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    box-sizing: border-box;
+}
+
+nav ul li a:hover {
+    background-color: var(--primary-color-darkblue);
+    color: white;
+    transition: background-color .25s;
+}
+
+main {
+    min-width: 100%;
+    justify-self: start;
+}
+
+ul {
+    list-style: none;
+    margin-top: 0;
+    padding-left: 0;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 300;
+}

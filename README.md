@@ -81,3 +81,7 @@ To start the project in a different mode:
 -   dev: `yarn dev`
 -   compat: `yarn start:compat`
 -   prod-compat: `yarn start:prod-compat`
+
+## Tips
+
+- [The syntheticShadow property must be true to allow the SLDS stylesheet to function as global styles.](https://developer.salesforce.com/docs/platform/lwr/guide/lwr-slds.html)

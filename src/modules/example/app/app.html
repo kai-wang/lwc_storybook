@@ -1,11 +1,14 @@
 <template>
-  <div class="exampleHolder">
-      <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
-  </div>
-  <div class="exampleHolder">
-      <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
-  </div>
-  <div class="exampleHolder">
-      <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
-  </div>
+  <lightning-card>
+      <h3 slot="title">
+          <lightning-icon icon-name="utility:email" size="small"></lightning-icon>
+          <span class="slds-p-left_small">Card Title</span>
+      </h3>
+      <div slot="footer">
+              <lightning-badge label="Tag1"></lightning-badge>
+              <lightning-badge label="Tag2"></lightning-badge>
+              <lightning-badge label="Tag3"></lightning-badge>
+      </div>
+      <p class="slds-p-horizontal_small">Card Body (custom component)</p>
+  </lightning-card>
 </template>

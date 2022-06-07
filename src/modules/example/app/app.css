@@ -1,6 +1,4 @@
-.exampleHolder{
-  position: relative;
-  display: inline-block;
-  width: 80px;
-  height: 80px;
+:host {
+  min-width:430px;
+  max-width:620px;
 }

@@ -6,20 +6,25 @@
   "type": "module",
   "scripts": {
     "clean": "rm -rf __lwr_cache__",
-    "dev": "lwr serve",
+    "dev": "npm run watch & lwr serve",
     "start": "lwr serve --mode prod",
     "start:compat": "lwr serve --mode compat",
     "start:prod-compat": "lwr serve --mode prod-compat",
-    "build": "node ./scripts/copy-slds.mjs"
+    "build": "node ./scripts/copy-slds.mjs",
+    "watch": "npx tailwindcss -i ./static/main.css -o ./src/modules/mq/style/style.css --watch"
   },
   "dependencies": {
+    "@avonni/base-components": "^1.3.0",
     "lightning-base-components": "^1.14.7-alpha",
     "lwc": "2.5.8",
     "lwr": "0.6.5"
   },
   "devDependencies": {
     "@salesforce-ux/design-system": "^2.17.5",
-    "cpx": "^1.5.0"
+    "autoprefixer": "^10.4.7",
+    "cpx": "^1.5.0",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.3"
   },
   "engines": {
     "node": ">=14.15.4 <17"

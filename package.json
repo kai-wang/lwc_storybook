@@ -10,7 +10,7 @@
     "start": "lwr serve --mode prod",
     "start:compat": "lwr serve --mode compat",
     "start:prod-compat": "lwr serve --mode prod-compat",
-    "build": "node ./scripts/copy-slds.mjs",
+    "setup-env": "node ./scripts/copy-slds.mjs",
     "watch": "npx tailwindcss -i ./static/main.css -o ./src/modules/mq/style/style.css --watch"
   },
   "dependencies": {

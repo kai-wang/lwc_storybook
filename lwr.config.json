@@ -2,7 +2,7 @@
   "lwc": {
     "modules": [
       { "dir": "$rootDir/src/modules" },
-      { "npm": "lightning-base-components" }
+      { "npm": "lightning-base-components" },
     ]
   },
   "bundleConfig": { "exclude": ["lwc"] },
@@ -26,6 +26,15 @@
       "id": "home",
       "path": "/",
       "rootComponent": "example/app",
+      "layoutTemplate": "$layoutsDir/main.html",
+      "bootstrap": {
+        "syntheticShadow": true
+      }
+    },
+    {
+      "id": "pricing",
+      "path": "/pricing",
+      "rootComponent": "example/pricing",
       "layoutTemplate": "$layoutsDir/main.html",
       "bootstrap": {
         "syntheticShadow": true

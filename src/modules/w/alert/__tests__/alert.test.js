@@ -17,6 +17,6 @@ describe('w-alert', () => {
 
         return Promise.resolve().then(() => {
           expect(element).toMatchSnapshot();
-        })
+        });
     });
 });

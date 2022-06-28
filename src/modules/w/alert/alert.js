@@ -1,4 +1,5 @@
 import { LightningElement } from 'lwc';
+import { _ } from 'w/utils';
 
 export default class Alert extends LightningElement {
     items = [
@@ -179,4 +180,18 @@ export default class Alert extends LightningElement {
             iconName: 'utility:edit'
         }
     ];
+
+    data = [
+      { name: 'Charlie' },
+      { name: 'Alice' },
+      { name: 'Bob' }
+    ];
+
+    constructor() {
+      super();
+
+      let arr = [2, 1, 8, 4, 5, 8];
+
+      console.log(_.sortBy(arr));
+    }
 }

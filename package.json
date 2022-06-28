@@ -1,33 +1,45 @@
 {
-  "name": "storybook",
+  "name": "lwr package",
+  "author": "Kai Wang",
   "version": "0.0.1",
   "license": "MIT",
   "private": true,
   "type": "module",
   "scripts": {
     "clean": "rm -rf __lwr_cache__",
-    "dev": "npm run watch & lwr serve",
+    "dev": "yarn watch & node ./scripts/start-server.mjs",
     "start": "lwr serve --mode prod",
     "start:compat": "lwr serve --mode compat",
     "start:prod-compat": "lwr serve --mode prod-compat",
     "setup-env": "node ./scripts/copy-slds.mjs",
-    "watch": "npx tailwindcss -i ./static/main.css -o ./src/modules/mq/style/style.css --watch"
+    "watch": "npx tailwindcss -i ./static/main.css -o ./src/assets/css/tw.css --watch",
+    "test:unit": "jest",
+    "test:unit:watch": "jest --watch",
+    "test:unit:coverage": "jest --coverage",
+    "test:unit:debug": "jest --debug"
   },
   "dependencies": {
-    "@avonni/base-components": "^1.3.0",
-    "lightning-base-components": "^1.14.7-alpha",
+    "@avonni/base-components": "^1.3.1",
+    "lightning-base-components": "^1.15.2-alpha",
     "lwc": "2.5.8",
-    "lwr": "0.6.5"
+    "lwr": "^0.7.1"
   },
   "devDependencies": {
-    "@salesforce-ux/design-system": "^2.17.5",
+    "@lwc/jest-preset": "^11.4.0",
+    "@sa11y/jest": "^3.1.0",
+    "@salesforce-ux/design-system": "^2.18.1",
     "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "autoprefixer": "^10.4.7",
     "cpx": "^1.5.0",
+    "jest": "^28.1.1",
+    "jest-canvas-mock": "^2.4.0",
+    "jest-environment-jsdom": "^28.1.1",
     "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.3"
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.4"
   },
   "engines": {
-    "node": ">=14.15.4 <17"
+    "node": ">=14.15.4 <=18.4.0"
   }
 }

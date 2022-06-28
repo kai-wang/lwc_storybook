@@ -2,7 +2,7 @@
   "lwc": {
     "modules": [
       { "dir": "$rootDir/src/modules" },
-      { "npm": "lightning-base-components" },
+      { "npm": "lightning-base-components" }
     ]
   },
   "bundleConfig": { "exclude": ["lwc"] },
@@ -25,7 +25,7 @@
     {
       "id": "home",
       "path": "/",
-      "rootComponent": "example/app",
+      "rootComponent": "example/tailwind",
       "layoutTemplate": "$layoutsDir/main.html",
       "bootstrap": {
         "syntheticShadow": true

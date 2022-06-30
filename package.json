@@ -1,5 +1,5 @@
 {
-  "name": "lwr package",
+  "name": "w-lib-lwc",
   "author": "Kai Wang",
   "version": "0.0.1",
   "license": "MIT",
@@ -16,7 +16,8 @@
     "test:unit": "jest",
     "test:unit:watch": "jest --watch",
     "test:unit:coverage": "jest --coverage",
-    "test:unit:debug": "jest --debug"
+    "test:unit:debug": "jest --debug",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@avonni/base-components": "^1.3.1",
@@ -32,12 +33,25 @@
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "autoprefixer": "^10.4.7",
     "cpx": "^1.5.0",
+    "husky": "^8.0.1",
     "jest": "^28.1.1",
     "jest-canvas-mock": "^2.4.0",
     "jest-environment-jsdom": "^28.1.1",
+    "lint-staged": "^13.0.3",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md,html}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "engines": {
     "node": ">=14.15.4 <=18.4.0"

@@ -1,1 +1,2 @@
-export { default as _ } from './lodash';
+// export { default as _ } from './lodash';
+export { clsx } from './clsx';

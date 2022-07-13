@@ -1,5 +1,100 @@
 /* @tailwind base; */
-@import "tailwindcss/components";
-@import "./components/_spinner.css";
-@import "tailwindcss/utilities";
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIl9jb21wb25lbnRzLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJfY29tcG9uZW50cy1pbnRlcm1lZGlhdGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogQHRhaWx3aW5kIGJhc2U7ICovXG5AaW1wb3J0IFwidGFpbHdpbmRjc3MvY29tcG9uZW50c1wiO1xuQGltcG9ydCBcIi4vY29tcG9uZW50cy9fc3Bpbm5lci5jc3NcIjtcbkBpbXBvcnQgXCJ0YWlsd2luZGNzcy91dGlsaXRpZXNcIjsiXX0= */
+/* @import "tailwindcss/components"; */
+.spin-xs {
+    margin-right: 0.5rem;
+    height: 1rem;
+    width: 1rem
+}
+@-webkit-keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+.spin-xs {
+    -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+    fill: var(--spin-foreground);
+    --tw-text-opacity: 1;
+    color: rgb(229 231 235 / var(--tw-text-opacity))
+}
+@media (prefers-color-scheme: dark) {
+    .spin-xs {
+        --tw-text-opacity: 1;
+        color: rgb(75 85 99 / var(--tw-text-opacity))
+    }
+}
+.spin-sm {
+    margin-right: 0.5rem;
+    height: 2rem;
+    width: 2rem
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+.spin-sm {
+    -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+    fill: var(--spin-foreground);
+    --tw-text-opacity: 1;
+    color: rgb(229 231 235 / var(--tw-text-opacity))
+}
+@media (prefers-color-scheme: dark) {
+    .spin-sm {
+        --tw-text-opacity: 1;
+        color: rgb(75 85 99 / var(--tw-text-opacity))
+    }
+}
+.spin-md {
+    margin-right: 0.5rem;
+    height: 4rem;
+    width: 4rem
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+.spin-md {
+    -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+    fill: var(--spin-foreground);
+    --tw-text-opacity: 1;
+    color: rgb(229 231 235 / var(--tw-text-opacity))
+}
+@media (prefers-color-scheme: dark) {
+    .spin-md {
+        --tw-text-opacity: 1;
+        color: rgb(75 85 99 / var(--tw-text-opacity))
+    }
+}
+.spin-lg {
+    margin-right: 0.5rem;
+    height: 6rem;
+    width: 6rem
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+.spin-lg {
+    -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+    fill: var(--spin-foreground);
+    --tw-text-opacity: 1;
+    color: rgb(229 231 235 / var(--tw-text-opacity))
+}
+@media (prefers-color-scheme: dark) {
+    .spin-lg {
+        --tw-text-opacity: 1;
+        color: rgb(75 85 99 / var(--tw-text-opacity))
+    }
+}
+/* @import "tailwindcss/utilities"; */

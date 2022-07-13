@@ -1,64 +1,18 @@
 
-.spin-xs {
-  @apply w-4 h-4 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
-}
+.spin {
+  &-xs {
+    @apply w-4 h-4 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
+  }
 
-.spin-sm {
-  @apply w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
-}
+  &-sm {
+    @apply w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
+  }
 
-.spin-md {
-  @apply w-16 h-16 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
-}
+  &-md {
+    @apply w-16 h-16 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
+  }
 
-.spin-lg {
-  @apply w-24 h-24 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
-}
-
-.spin--loading {
-  animation-duration: .69s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: rotate;
-  animation-timing-function: linear;
-  border: 0;
-  box-sizing: border-box;
-  font-family: inherit;
-  font-size: 100%;
-  height: 5.5rem;
-  margin: 0;
-  padding: 0;
-  vertical-align: initial;
-  width: 5.5rem;
-}
-
-.spin--loading svg circle {
-  animation-duration: 10ms;
-  animation-name: init-stroke;
-  animation-timing-function: cubic-bezier(.5,0,.1,1);
-}
-
-.spin__background {
-  stroke: var(--cds-layer-accent);
-  stroke-dashoffset: -22;
-}
-
-.spin__stroke {
-  stroke: var(--cds-interactive,#0f62fe);
-  stroke-dashoffset: 52.527552;
-}
-
-.spin__svg circle {
-  stroke-dasharray: 276.4608 276.4608;
-  stroke-linecap: butt;
-  stroke-width: 10;
-}
-
-.spin__svg {
-  fill: #0000;
-}
-
-
-.test {
-  fill: red;
+  &-lg {
+    @apply w-24 h-24 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
+  }
 }

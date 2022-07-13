@@ -7,23 +7,26 @@
   "type": "module",
   "scripts": {
     "clean": "rm -rf __lwr_cache__",
-    "dev": "yarn watch & node ./scripts/start-server.mjs",
+    "dev": "npm run watch & node ./scripts/start-server.mjs",
     "start": "lwr serve --mode prod",
     "start:compat": "lwr serve --mode compat",
     "start:prod-compat": "lwr serve --mode prod-compat",
     "setup-env": "node ./scripts/copy-slds.mjs",
-    "watch": "npx tailwindcss -i ./static/main.css -o ./src/assets/css/tw.css --watch",
+    "init:base": "npx postcss ./static/src/_base.css -o ./static/src/_base-intermediate.css & npx tailwindcss -i ./static/src/_base-intermediate.css -o ./src/assets/css/base.css",
+    "init:component": "npx postcss ./static/src/_components.css -o ./static/src/_components-intermediate.css & npx tailwindcss -i ./static/src/_components-intermediate.css -o ./src/assets/css/_components.css",
+    "watch:base": "npx postcss ./static/src/_base.css -o ./static/src/_base-intermediate.css --watch & npx tailwindcss -i ./static/src/_base-intermediate.css -o ./src/assets/css/base.css --watch",
+    "watch:component": "npx postcss ./static/src/_components.css -o ./static/src/_components-intermediate.css --watch & npx tailwindcss -i ./static/src/_components-intermediate.css -o ./src/assets/css/components.css --watch",
+    "watch": "npm run watch:component",
     "test:unit": "jest",
     "test:unit:watch": "jest --watch",
     "test:unit:coverage": "jest --coverage",
-    "test:unit:debug": "jest --debug",
-    "prepare": "husky install"
+    "test:unit:debug": "jest --debug"
   },
   "dependencies": {
     "@avonni/base-components": "^1.3.1",
     "lightning-base-components": "^1.15.2-alpha",
-    "lwc": "2.5.8",
-    "lwr": "^0.7.1"
+    "lwc": "^2.20.0",
+    "lwr": "^0.6.5"
   },
   "devDependencies": {
     "@lwc/jest-preset": "^11.4.0",
@@ -39,8 +42,15 @@
     "jest-environment-jsdom": "^28.1.1",
     "lint-staged": "^13.0.3",
     "postcss": "^8.4.14",
+    "postcss-cli": "^10.0.0",
+    "postcss-extend": "^1.0.5",
+    "postcss-mixins": "^9.0.3",
+    "postcss-nested": "^5.0.6",
+    "postcss-nesting": "^10.1.10",
+    "postcss-sassy-mixins": "^2.1.0",
+    "postcss-simple-vars": "^6.0.3",
     "prettier": "^2.7.1",
-    "tailwindcss": "^3.1.4"
+    "tailwindcss": "^3.1.5"
   },
   "husky": {
     "hooks": {

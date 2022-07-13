@@ -1,0 +1,5 @@
+/* @tailwind base; */
+@import "tailwindcss/components";
+@import "./components/_spinner.css";
+@import "tailwindcss/utilities";
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIl9jb21wb25lbnRzLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJfY29tcG9uZW50cy1pbnRlcm1lZGlhdGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogQHRhaWx3aW5kIGJhc2U7ICovXG5AaW1wb3J0IFwidGFpbHdpbmRjc3MvY29tcG9uZW50c1wiO1xuQGltcG9ydCBcIi4vY29tcG9uZW50cy9fc3Bpbm5lci5jc3NcIjtcbkBpbXBvcnQgXCJ0YWlsd2luZGNzcy91dGlsaXRpZXNcIjsiXX0= */

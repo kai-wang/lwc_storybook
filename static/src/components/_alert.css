@@ -1,14 +1,44 @@
 .alert {
-  @apply flex w-full h-auto text-black items-start justify-start;
+  @apply flex w-full h-auto items-start justify-start focus:outline-1 focus:outline-blue-60 text-gray-100;
 
   svg {
       @apply fill-current h-auto w-6 h-6;
   }
 
-  &_content {
-    @apply grow;
+  &-inline {
+    @apply border-solid	border-l-[3px];
+
+    &_detail {
+      @apply my-3 grow;
+      
+      .title {
+        @apply font-semibold;
+      }
+    }
+
+    &_icon {
+      @apply my-3 mr-4 grow-0;
+    }
+
+    &_close_icon {
+      @apply my-3 mr-4 grow-0;
+    }
   }
-  close_icon {
-    @apply flex-none;
+
+  &-error {
+    @apply border-l-red-50 bg-red-10;
   }
+
+  &-info {
+    @apply border-l-blue-50 bg-blue-10;
+  }
+
+  &-success {
+    @apply border-l-green-50 bg-green-10;
+  }
+
+  &-warn {
+    @apply border-l-yellow-50 bg-yellow-10;
+  }
+
 }

@@ -1,22 +1,20 @@
 <template>
-  <div class="shadow-lg rounded p-8 bg-white">
-    <p class="font-light text-gray-700 leading-relaxed">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-      repellendus iure rerum ratione aliquam nulla cupiditate amet deleniti ut a
-      laboriosam debitis, vel dicta quisquam consectetur! Consectetur
-      repellendus maiores quis.
-    </p>
-    <div class="flex items-center justify-end mt-4">
+   <div data-notification class={computedClass} aria-live="false">
+      <w-svg-icon src={icon} class={iconClass}></w-svg-icon>
+      <div class={detailClass}>
+         <slot name="content">
+            <h3 class="title">{title}</h3>
+         </slot>
+      </div>
       <button
-        class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 mr-4"
+         if:true={dismissible}
+         aria-label="closeAriaLabel"
+         type="button"
+         data-notification-btn
+         class={closeIconClass}
+         onclick={handleClose}
       >
-        Cancel
+         <w-svg-icon src={close_icon}></w-svg-icon>
       </button>
-      <button
-        class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50"
-      >
-        Ok
-      </button>
-    </div>
-  </div>
+   </div>
 </template>

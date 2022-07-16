@@ -1,10 +1,4 @@
 /* @tailwind base; */
-/* @import "tailwindcss/components"; */
-.spin-xs {
-    margin-right: 0.5rem;
-    height: 1rem;
-    width: 1rem
-}
 @-webkit-keyframes spin {
     to {
         transform: rotate(360deg)
@@ -15,86 +9,249 @@
         transform: rotate(360deg)
     }
 }
-.spin-xs {
+.spin-base {
     -webkit-animation: spin 1s linear infinite;
             animation: spin 1s linear infinite;
-    fill: var(--spin-foreground);
     --tw-text-opacity: 1;
     color: rgb(229 231 235 / var(--tw-text-opacity))
 }
 @media (prefers-color-scheme: dark) {
-    .spin-xs {
+    .spin-base {
         --tw-text-opacity: 1;
         color: rgb(75 85 99 / var(--tw-text-opacity))
     }
 }
-.spin-sm {
-    margin-right: 0.5rem;
+.spin-size-xs {
+    height: 1rem;
+    width: 1rem
+}
+.spin-size-sm {
     height: 2rem;
     width: 2rem
 }
-@keyframes spin {
-    to {
-        transform: rotate(360deg)
-    }
+.spin-size-md {
+    height: 3rem;
+    width: 3rem
 }
-.spin-sm {
-    -webkit-animation: spin 1s linear infinite;
-            animation: spin 1s linear infinite;
-    fill: var(--spin-foreground);
-    --tw-text-opacity: 1;
-    color: rgb(229 231 235 / var(--tw-text-opacity))
-}
-@media (prefers-color-scheme: dark) {
-    .spin-sm {
-        --tw-text-opacity: 1;
-        color: rgb(75 85 99 / var(--tw-text-opacity))
-    }
-}
-.spin-md {
-    margin-right: 0.5rem;
+.spin-size-lg {
     height: 4rem;
     width: 4rem
 }
-@keyframes spin {
-    to {
-        transform: rotate(360deg)
-    }
-}
-.spin-md {
-    -webkit-animation: spin 1s linear infinite;
-            animation: spin 1s linear infinite;
-    fill: var(--spin-foreground);
-    --tw-text-opacity: 1;
-    color: rgb(229 231 235 / var(--tw-text-opacity))
-}
-@media (prefers-color-scheme: dark) {
-    .spin-md {
-        --tw-text-opacity: 1;
-        color: rgb(75 85 99 / var(--tw-text-opacity))
-    }
-}
-.spin-lg {
-    margin-right: 0.5rem;
+.spin-size-xl {
     height: 6rem;
     width: 6rem
 }
-@keyframes spin {
-    to {
-        transform: rotate(360deg)
-    }
+.assistive-text {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    white-space: nowrap
 }
-.spin-lg {
-    -webkit-animation: spin 1s linear infinite;
-            animation: spin 1s linear infinite;
-    fill: var(--spin-foreground);
+.btn {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+    vertical-align: middle
+}
+.btn svg {
+    height: auto;
+    fill: currentColor
+}
+.btn-primary {
+    border-width: 1px;
+    border-style: solid;
+    --tw-bg-opacity: 1;
+    background-color: rgb(15 98 254 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
-    color: rgb(229 231 235 / var(--tw-text-opacity))
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms
 }
-@media (prefers-color-scheme: dark) {
-    .spin-lg {
-        --tw-text-opacity: 1;
-        color: rgb(75 85 99 / var(--tw-text-opacity))
-    }
+.btn-primary:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 80 230 / var(--tw-bg-opacity))
 }
-/* @import "tailwindcss/utilities"; */
+.btn-primary:focus {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
+}
+.btn-primary:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 45 156 / var(--tw-bg-opacity))
+}
+.btn-disabled {
+    cursor: not-allowed;
+    background-color: transparent;
+    --tw-text-opacity: 1;
+    color: rgb(141 141 141 / var(--tw-text-opacity));
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+.btn-secondary {
+    border-width: 1px;
+    border-style: solid;
+    --tw-bg-opacity: 1;
+    background-color: rgb(57 57 57 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms
+}
+.btn-secondary:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(71 71 71 / var(--tw-bg-opacity))
+}
+.btn-secondary:focus {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
+}
+.btn-secondary:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(111 111 111 / var(--tw-bg-opacity))
+}
+.btn-outline {
+    border-width: 1px;
+    border-style: solid;
+    --tw-border-opacity: 1;
+    border-color: rgb(15 98 254 / var(--tw-border-opacity));
+    background-color: transparent;
+    --tw-text-opacity: 1;
+    color: rgb(15 98 254 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms
+}
+.btn-outline:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 80 230 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+.btn-outline:focus {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
+}
+.btn-outline:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 45 156 / var(--tw-bg-opacity))
+}
+.btn-ghost {
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    background-color: transparent;
+    --tw-text-opacity: 1;
+    color: rgb(15 98 254 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms
+}
+.btn-ghost:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(232 232 232 / var(--tw-bg-opacity))
+}
+.btn-ghost:focus {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
+}
+.btn-ghost:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(198 198 198 / var(--tw-bg-opacity))
+}
+.btn-size-xs {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500
+}
+.btn-size-xs svg {
+    height: 0.75rem;
+    width: 0.75rem
+}
+.btn-size-sm {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500
+}
+.btn-size-sm svg {
+    height: 0.75rem;
+    width: 0.75rem
+}
+.btn-size-base {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 500
+}
+.btn-size-base svg {
+    height: 1rem;
+    width: 1rem
+}
+.btn-size-lg {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 500
+}
+.btn-size-lg svg {
+    height: 1.5rem;
+    width: 1.5rem
+}
+.btn-size-xl {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 500
+}
+.btn-size-xl svg {
+    height: 2rem;
+    width: 2rem
+}
+.alert {
+    display: flex;
+    height: auto;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+.alert svg {
+    height: auto;
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: currentColor
+}
+.alert_content {
+    flex-grow: 1
+}
+.alert close_icon {
+    flex: none
+}

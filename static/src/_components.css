@@ -1,4 +1,4 @@
 /* @tailwind base; */
-/* @import "tailwindcss/components"; */
 @import "./components/_spinner.css";
-/* @import "tailwindcss/utilities"; */
+@import "./components/_button.css";
+@import "./components/_alert.css";

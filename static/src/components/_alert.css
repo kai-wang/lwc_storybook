@@ -1,0 +1,14 @@
+.alert {
+  @apply flex w-full h-auto text-black items-start justify-start;
+
+  svg {
+      @apply fill-current h-auto w-6 h-6;
+  }
+
+  &_content {
+    @apply grow;
+  }
+  close_icon {
+    @apply flex-none;
+  }
+}

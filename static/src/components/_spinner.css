@@ -1,18 +1,29 @@
 
 .spin {
-  &-xs {
-    @apply w-4 h-4 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
+
+  &-base {
+    @apply text-gray-200 animate-spin dark:text-gray-600;
   }
 
-  &-sm {
-    @apply w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
-  }
+  &-size {
+    &-xs {
+      @apply w-4 h-4;
+    }
+  
+    &-sm {
+      @apply w-8 h-8;  
+    }
+  
+    &-md {
+      @apply w-12 h-12;
+    }
+  
+    &-lg {
+      @apply w-16 h-16;
+    }
 
-  &-md {
-    @apply w-16 h-16 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
-  }
-
-  &-lg {
-    @apply w-24 h-24 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-spin-fg;
+    &-xl {
+      @apply w-24 h-24;
+    }
   }
 }

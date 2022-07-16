@@ -1,12 +1,8 @@
 <template>
-  <svg 
-    class={computedClass} 
-    focusable="false" 
-    aria-hidden="true"
-  >
-    <template if:true={title}>
-      <title>{title}</title>
-    </template>
-    <use href={src} />
-  </svg>
+   <svg class={computedClass} focusable="false" aria-hidden="true">
+      <template if:true={title}>
+         <title>{title}</title>
+      </template>
+      <use href={src} />
+   </svg>
 </template>

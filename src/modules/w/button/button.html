@@ -1,0 +1,24 @@
+<template>
+   <button
+      if:false={iconOnly}
+      class={computedClass}
+      type={buttonType}
+      disabled={disabled}
+      role="button"
+   >
+      <span class={assistiveTextClass}>{assistiveText}</span>
+      <w-spinner if:true={loading} class="mr-2"></w-spinner>
+      <w-svg-icon if:true={leftIcon} src={icon} class="mr-1"></w-svg-icon>
+      <slot></slot>
+      <w-svg-icon if:true={rightIcon} src={icon} class="ml-1"></w-svg-icon>
+   </button>
+   <button
+      if:true={iconOnly}
+      class={computedClass}
+      type={buttonType}
+      disabled={disabled}
+      role="button"
+   >
+      <w-svg-icon src={icon}></w-svg-icon>
+   </button>
+</template>

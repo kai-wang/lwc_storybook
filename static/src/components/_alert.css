@@ -1,10 +1,6 @@
 .alert {
   @apply flex w-full h-auto items-start justify-start focus:outline-1 focus:outline-blue-60 text-gray-100;
 
-  svg {
-      @apply fill-current h-auto w-6 h-6;
-  }
-
   &-inline {
     @apply border-solid	border-l-[3px];
 
@@ -17,28 +13,52 @@
     }
 
     &_icon {
-      @apply my-3 mr-4 grow-0;
+      @apply my-3 mx-3 grow-0 h-5 w-5;
     }
 
     &_close_icon {
       @apply my-3 mr-4 grow-0;
+
+      svg {
+        @apply h-6 w-6 fill-current;
+      }
     }
   }
 
   &-error {
     @apply border-l-red-50 bg-red-10;
+
+    &_icon {
+      @apply fill-red-70;
+    }
   }
 
   &-info {
     @apply border-l-blue-50 bg-blue-10;
+
+    &_icon {
+      @apply fill-blue-80;
+    }
   }
 
   &-success {
     @apply border-l-green-50 bg-green-10;
+
+    &_icon {
+      @apply fill-blue-80;
+    }
   }
 
   &-warn {
     @apply border-l-yellow-50 bg-yellow-10;
+
+    &_icon {
+      @apply fill-yellow-70;
+    }
+  }
+
+  &-hidden {
+    @apply hidden;
   }
 
 }

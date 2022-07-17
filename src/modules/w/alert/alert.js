@@ -10,11 +10,12 @@ const KIND = {
 export default class Alert extends LightningElement {
   @api prefix = 'alert';
   @api dismissible = false;
-  @api icon = '/assets/custom/sprites-16.svg#close--filled';
+  @api icon = '/assets/custom/sprites-32.svg#information';
   @api close_icon = '/assets/custom/sprites-32.svg#close';
   @api title;
 
   _kind = KIND.fallbackValue;
+  _close = false;
 
   @api get kind() {
     return this._kind;
@@ -28,7 +29,10 @@ export default class Alert extends LightningElement {
     return clsx(
       `${this.prefix}`,
       `${this.prefix}-inline`,
-      `${this.prefix}-${this._kind}`
+      `${this.prefix}-${this._kind}`,
+      {
+        [`${this.prefix}-hidden`]: this._close
+      }
     );
   }
 
@@ -37,12 +41,14 @@ export default class Alert extends LightningElement {
   }
 
   get iconClass() {
-    return clsx(`${this.prefix}-inline_icon`);
+    return clsx(`${this.prefix}-inline_icon`, `${this.prefix}-${this._kind}_icon`);
   }
 
   get closeIconClass() {
     return clsx(`${this.prefix}-inline_close_icon`);
   }
 
-  handleClose() {}
+  handleClose() {
+    this._close = true;
+  }
 }

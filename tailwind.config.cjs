@@ -8,7 +8,35 @@ module.exports = {
   content: ["./src/modules/**/*.{html,js}"],
   theme: {
     extend: {
+      zIndex: {
+        1: "1"
+      },
+      fontSize: {
+        "bs-1": "var(--cds-body-short-01-font-size, 0.875rem)",
+        "bl-1": "var(--cds-body-long-01-font-size, 0.875rem)",
+        "link-sm": "var(--cds-helper-text-01-font-size, 0.75rem)",
+        "link-lg": "var(--cds-body-short-02-font-size, 1rem)"
+      },
+      fontWeight: {
+        "bs-1": "var(--cds-body-short-01-font-weight, 400)",
+        "bs-1": "var(--cds-body-long-01-font-weight, 400)",
+      },
+      lineHeight: {
+        "bs-1": "var(--cds-body-short-01-line-height, 1.28572)",
+        "bl-1": "var(--cds-body-long-01-line-height, 1.42857)",
+      },
+      letterSpacing: {
+        "bs-1": "var(--cds-body-short-01-letter-spacing, 0.16px)",
+        "bl-1": "var(--cds-body-long-01-letter-spacing, 0.16px)",
+      },
+      transitionTimingFunction: {
+        "accordion": "cubic-bezier(0.2, 0, 0.38, 0.9)"
+      },
       colors: {
+        'ui-3': 'var(--cds-ui-03, #e0e0e0)',
+        'ui-5': 'var(--cds-ui-05, #161616)',
+        'disabled-1':'var(--cds-disabled-01, #f4f4f4)',
+        'text-1': 'var(--cds-text-01, #161616)',
         'black': '#000000',
         'blue': {
           10: '#edf5ff',
@@ -308,12 +336,7 @@ module.exports = {
   },
   // plugins: [require('@tailwindcss/aspect-ratio')],
   plugins: [
-    require('postcss-import'),
-    require('@tailwindcss/nesting'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-    require('postcss-sassy-mixins'),
-    require('postcss-simple-vars'),
-    require('postcss-extend')
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio')
 ]
 }

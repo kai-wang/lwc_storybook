@@ -3,38 +3,22 @@ import { clsx } from 'w/utils';
 import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
 
 export default class Test extends LightningElement {
-  @api title = "title";
+  @api title = 'title';
   @api open = false;
   @api disabled = false;
   @api iconDescription = 'Expand/Collapse';
+  @api align;
 
   _animation;
 
   get computedClass() {
-    return clsx('overflow-visible border-t-[1px] border-solid border-ui-3 transition-all delay-[110ms]',
-    {
-      ['overflow-visible']: this.open,
-    },
-    {
-      ['bt-[1px] border-solid border-disabled-1']: this.disabled
-    },
-    {
-      ['block']: this.open
-    }
-    );
-  }
-
-
-  get contentClass() {
     return clsx(
-      this.open ? 'block pt-3 transition-all wx-accordion-expand' : 'hidden px-4 wx-accordion-collapse'
-    )
-  }
-
-  get iconClass() {
-    return clsx('w-4 h-4 transition-all flex', {
-      ['-rotate-90']: this.open
-    });
+      'bx--accordion__item',
+      this.open && 'bx--accordion__item--active',
+      this.disabled && 'bx--accordion__item--disabled',
+      this._animation === 'expanding' && 'bx--accordion__item--expanding',
+      this._animation === 'collapsing' && 'bx--accordion__item--collapsing'
+    );
   }
 
   handleClick() {
@@ -43,6 +27,6 @@ export default class Test extends LightningElement {
   }
 
   handleAnimationend() {
-    console.log('handleAnimationend');
+    this._animation = null;
   }
 }

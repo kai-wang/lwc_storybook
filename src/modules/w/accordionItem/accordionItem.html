@@ -2,23 +2,23 @@
    <li class={computedClass} onanimationend={handleAnimationend}>
       <button
          type="button"
-         class="inline-block p-0 appearance-none cursor-pointer w-full min-h-[2.5rem] relative flex flex-row-reverse items-start justify-start px-3 text-text-1 transition"
+         class="bx--accordion__heading"
          title={iconDescription}
          aria-expanded={open}
          disabled={disabled}
          onclick={handleClick}
       >
-          <w-svg-icon
-          src="/assets/custom/sprites-32.svg#chevron--right" class-name={iconClass}
-       ></w-svg-icon>
+         <w-svg-icon
+            class="bx--accordion__arrow"
+            aria-label={iconDescription}
+            src="/assets/custom/sprites-32.svg#chevron--right"
+         ></w-svg-icon>
 
-         <div
-            class="text-bs-1 font-bl-1 leading-bl-1 tracking-bl-1 z-1 w-full ml-4 text-left"
-         >
-            <slot name="title">{title}</slot> 
+         <div class="bx--accordion__title">
+            <slot name="title">{title}</slot>
          </div>
       </button>
-      <div class={contentClass}>
+      <div class="bx--accordion__content">
          <slot></slot>
       </div>
    </li>

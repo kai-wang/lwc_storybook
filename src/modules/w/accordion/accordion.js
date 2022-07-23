@@ -13,13 +13,30 @@ const ALIGN = {
 };
 
 export default class Accordion extends LightningElement {
+  _align = ALIGN.fallbackValue;
+  _size = SIZE.fallbackValue;
 
-  @api align = ALIGN.fallbackValue;
-  @api size = SIZE.fallbackValue;
-  @api disabled = false;
-
-  get computedClass() {
-    return clsx('w-full list-none');
+  @api get align() {
+    return this._align;
   }
 
+  set align(value) {
+    this._align = normalizeString(value, ALIGN);
+  }
+
+  @api get size() {
+    return this._size;
+  }
+
+  set size(value) {
+    this._size = normalizeString(value, SIZE);
+  }
+
+  get computedClass() {
+    return clsx(
+      'bx--accordion',
+      `bx--accordion--${this._align}`,
+      `bx--accordion--${this._size}`
+    );
+  }
 }

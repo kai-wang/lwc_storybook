@@ -1,0 +1,22 @@
+<template>
+   <template if:true={disabled}>
+      <p class={computedClass} onclick={handleClick}>
+         <slot></slot>
+         <template if:true={showIcon}>
+            <div class="bx--link__icon">
+               <w-svg-icon src={icon}></w-svg-icon>
+            </div>
+         </template>
+      </p>
+   </template>
+   <template if:false={disabled}>
+      <a class={computedClass} target={target} rel={rel} href={href}>
+         <slot></slot>
+         <template if:true={showIcon}>
+            <div class="bx--link__icon">
+               <w-svg-icon src={icon}></w-svg-icon>
+            </div>
+         </template>
+      </a>
+   </template>
+</template>

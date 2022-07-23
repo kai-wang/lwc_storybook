@@ -4,12 +4,20 @@ import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
 
 const KIND = {
   fallbackValue: 'primary',
-  validValues: ['primary', 'secondary', 'outline', 'ghost']
+  validValues: [
+    'primary',
+    'secondary',
+    'tertiary',
+    'ghost',
+    'danger',
+    'danger-tertiary',
+    'danger-ghost'
+  ]
 };
 
 const SIZE = {
-  fallbackValue: 'base',
-  validValues: ['base', 'xs', 'sm', 'lg', 'xl']
+  fallbackValue: 'default',
+  validValues: ['default', 'field', 'sm', 'lg', 'xl']
 };
 
 const TYPE = {
@@ -22,26 +30,30 @@ const ICON_POSITION = {
   validValues: ['left', 'right', 'center']
 };
 
+const TOOLTIP_ALIGNMENT = {
+  fallbackValue: 'center',
+  validValues: ['left', 'right', 'center']
+};
+
+const TOOLTIP_POSITION = {
+  fallbackValue: 'bottom',
+  validValues: ['top', 'right', 'bottom', 'left']
+};
+
 export default class Button extends LightningElement {
-  @api icon;
-  @api prefix = 'btn';
-  @api iconOnly = false;
-  @api disabled = false;
-  @api loading = false;
-  @api assistiveText;
-
-  _size = SIZE.fallbackValue;
   _kind = KIND.fallbackValue;
-  _type = TYPE.fallbackValue;
-  _iconPosition = ICON_POSITION.fallbackValue;
+  _size = SIZE.fallbackValue;
+  _tooltipPosition = TOOLTIP_POSITION.fallbackValue;
+  _tooltipAlignment = TOOLTIP_ALIGNMENT.fallbackValue;
 
-  @api get size() {
-    return this._size;
-  }
-
-  set size(value) {
-    this._size = normalizeString(value, SIZE);
-  }
+  @api expressive = false;
+  @api isSelected = false;
+  @api icon;
+  @api iconDescription;
+  @api disabled = false;
+  @api href;
+  @api customClass;
+  @api iconOnly = false;
 
   @api get kind() {
     return this._kind;
@@ -51,52 +63,80 @@ export default class Button extends LightningElement {
     this._kind = normalizeString(value, KIND);
   }
 
-  @api get buttonType() {
-    return this._type;
+  @api get size() {
+    return this._size;
   }
 
-  set buttonType(value) {
-    this._type = normalizeString(value, TYPE);
+  set size(value) {
+    this._size = normalizeString(value, SIZE);
   }
 
-  @api get iconPosition() {
-    return this._iconPosition;
+  @api get tooltipAlignment() {
+    return this._tooltipAlignment;
   }
 
-  set iconPosition(value) {
-    this._iconPosition = normalizeString(value, ICON_POSITION);
+  set tooltipAlignment(value) {
+    this._tooltipAlignment = normalizeString(value, TOOLTIP_ALIGNMENT);
   }
 
-  get leftIcon() {
-    return (
-      normalizeBoolean(this.icon) &&
-      this._iconPosition === 'left' &&
-      !normalizeBoolean(this.loading)
-    );
+  @api get tooltipPosition() {
+    return this._tooltipPosition;
   }
 
-  get rightIcon() {
-    return (
-      normalizeBoolean(this.icon) &&
-      this._iconPosition === 'right' &&
-      !normalizeBoolean(this.loading)
-    );
+  set tooltipPosition(value) {
+    this._tooltipPosition = normalizeString(value, TOOLTIP_POSITION);
   }
 
-  get assistiveTextClass() {
-    return clsx(`assistive-text`);
+  get link() {
+    return normalizeBoolean(this.href);
+  }
+
+  get hasIcon() {
+    return normalizeBoolean(this.icon);
+  }
+
+  hasIconOnly() {
+    return this.hasIcon && this.iconOnly;
+  }
+
+  get ariaPressed() {
+    return this.hasIconOnly() &&
+      this._kind === 'ghost' &&
+      !normalizeBoolean(this.href)
+      ? this.isSelected
+      : false;
   }
 
   get computedClass() {
     return clsx(
-      `${this.prefix}`,
-      `${this.prefix}-size-${this._size}`,
-      {
-        [`${this.prefix}-disabled`]: normalizeBoolean(this.disabled)
-      },
-      {
-        [`${this.prefix}-${this._kind}`]: !normalizeBoolean(this.disabled)
-      }
+      'bx--btn',
+      this.expressive && 'bx--btn--expressive',
+      this.size === 'sm' && !this.expressive && 'bx--btn--sm',
+      (this.size === 'field' && !this.expressive) ||
+        (this.size === 'md' && !this.expressive && 'bx--btn--md'),
+      this.size === 'field' && 'bx--btn--field',
+      this.size === 'lg' && 'bx--btn--lg',
+      this.size === 'xl' && 'bx--btn-xl',
+      `bx--btn--${this._kind}`,
+      this.disabled && 'bx--btn--disabled',
+      this.hasIconOnly() && 'bx--btn--icon-only',
+      this.hasIconOnly() && 'bx--tooltip__trigger',
+      this.hasIconOnly() && 'bx--tooltip-a11y',
+      this.hasIconOnly() &&
+        this._tooltipPosition &&
+        `bx--btn--icon-only--${this._tooltipPosition}`,
+      this.hasIconOnly() &&
+        this._tooltipAlignment &&
+        `bx--btn--icon-only--${this._tooltipAlignment}`,
+      this.hasIconOnly() &&
+        this.isSelected &&
+        this._kind === 'ghost' &&
+        'bx--btn--selected',
+      this.customClass
     );
+  }
+
+  handleClick(event) {
+    this.dispatchEvent(new CustomEvent('click'));
   }
 }

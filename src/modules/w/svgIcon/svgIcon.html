@@ -1,8 +1,14 @@
 <template>
-   <svg class={computedClass} focusable="false" aria-hidden="true">
+   <svg
+      class={computedClass}
+      role={role}
+      width={size}
+      height={size}
+      fill={fill}
+   >
       <template if:true={title}>
          <title>{title}</title>
       </template>
-      <use href={src} />
+      <use xlink:href={src} />
    </svg>
 </template>

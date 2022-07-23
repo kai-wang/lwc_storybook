@@ -1,24 +1,55 @@
 <template>
-   <button
-      if:false={iconOnly}
-      class={computedClass}
-      type={buttonType}
-      disabled={disabled}
-      role="button"
-   >
-      <span class={assistiveTextClass}>{assistiveText}</span>
-      <w-spinner if:true={loading} class="mr-2"></w-spinner>
-      <w-svg-icon if:true={leftIcon} src={icon} class="mr-1"></w-svg-icon>
-      <slot></slot>
-      <w-svg-icon if:true={rightIcon} src={icon} class="ml-1"></w-svg-icon>
-   </button>
-   <button
-      if:true={iconOnly}
-      class={computedClass}
-      type={buttonType}
-      disabled={disabled}
-      role="button"
-   >
-      <w-svg-icon src={icon}></w-svg-icon>
-   </button>
+   <template if:true={link}>
+      <a
+         href={href}
+         onclick={handleClick}
+         aria-pressed={ariaPressed}
+         class={computedClass}
+      >
+         <span if:true={hasIconOnly} class="bx--assistive-text"
+            >{iconDescription}</span
+         >
+         <template if:false={iconOnly}>
+            <slot></slot>
+         </template>
+         <w-svg-icon
+            if:true={hasIcon}
+            src={icon}
+            class="bx--btn__icon"
+            aria-hidden="true"
+            aria-label={iconDescription}
+         ></w-svg-icon>
+      </a>
+   </template>
+   <template if:false={link}>
+      <button
+         type="button"
+         disabled={disabled}
+         aria-pressed={ariaPressed}
+         onclick={handleClick}
+         class={computedClass}
+      >
+         <span if:true={hasIconOnly} class="bx--assistive-text"
+            >{iconDescription}</span
+         >
+         <template if:false={iconOnly}>
+            <slot></slot>
+         </template>
+         <!-- <lightning-icon
+            if:true={hasIcon}
+            class="bx--btn__icon"
+            src={icon}
+            aria-hidden="true"
+            size="small"
+            aria-label={iconDescription}
+         ></lightning-icon> -->
+         <w-svg-icon
+            if:true={hasIcon}
+            src={icon}
+            class="bx--btn__icon"
+            aria-hidden="true"
+            aria-label={iconDescription}
+         ></w-svg-icon>
+      </button>
+   </template>
 </template>

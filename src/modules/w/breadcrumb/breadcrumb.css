@@ -1,0 +1,18 @@
+/* .wx--breadcrumb {
+    font-size: var(--cds-body-short-01-font-size, 0.875rem);
+    font-weight: var(--cds-body-short-01-font-weight, 400);
+    line-height: var(--cds-body-short-01-line-height, 1.28572);
+    letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+    display: inline;
+}
+
+@media (min-width: 42rem) {
+    .wx--breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.wx--breadcrumb--no-trailing-slash .wx--breadcrumb-item:last-child::after {
+  content: "";
+} */

@@ -1,0 +1,30 @@
+<template>
+   <div id={id} class="bx--form-item">
+      <fieldset class={computedClass} disabled={disabled}>
+         <legend if:true={legendText} class={computedLegendClass}>
+            <slot name="legendText">{legendText}</slot>
+         </legend>
+         <template for:each={options} for:item="option">
+            <div class={computedRadioClass} key={option.value}>
+               <input
+                  type="radio"
+                  id={option.id}
+                  name={name}
+                  checked={option.checked}
+                  disabled={option.disabled}
+                  required={required}
+                  value={option.value}
+                  class="bx--radio-button"
+                  onchange={handleChange}
+               />
+               <label class="bx--radio-button__label" for={option.id}>
+                  <span class="bx--radio-button__appearance"></span>
+                  <span if:true={option.label} class={computedLabelClass}>
+                     <slot name="labelText">{option.label}</slot>
+                  </span>
+               </label>
+            </div>
+         </template>
+      </fieldset>
+   </div>
+</template>

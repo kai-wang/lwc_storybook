@@ -145,3 +145,7 @@ export function escapeHTML(html) {
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
 }
+
+export function uid(prefix) {
+    return prefix + Math.random().toString(36).substring(2, 8);
+}

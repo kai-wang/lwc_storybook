@@ -1,0 +1,44 @@
+<template>
+   <div role="navigation" class={computedContainerClass}>
+      <div
+         role="listbox"
+         tabindex="0"
+         class="bx--tabs-trigger"
+         aria-label="listbox"
+      >
+         <a
+            tabindex="-1"
+            class="bx--tabs-trigger-text"
+            href={triggerHref}
+         >
+            <template if:true={currentTab}>{currentTab.label}</template>
+         </a>
+      </div>
+      <ul role="tablist" class={computedNavClass}>
+         <template for:each={tabs} for:item="tab">
+            <li
+               key={tab.id}
+               tabindex="-1"
+               role="presentation"
+               class={tab.computedClass}
+            >
+               <a
+                  role="tab"
+                  aria-selected={tab.selected}
+                  aria-disabled={tab.disabled}
+                  id={tab.id}
+                  href={tab.href}
+                  class="bx--tabs__nav-link"
+                  style={tab.style}
+                  onfocus={handleTabClick}
+                  onkeydown={handleTabKeydown}
+                  data-id={tab.index}
+               >
+                  <slot>{tab.label}</slot>
+               </a>
+            </li>
+         </template>
+      </ul>
+   </div>
+   <slot name="content" onslotchange={handleSlotChange}></slot>
+</template>

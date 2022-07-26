@@ -1,15 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
-
-const CLS = {
-  'default': {
-    'inputClass': 'w-4 h-4 text-gray-70 border-gray-30 focus:ring-gray-50 focus:ring-1',
-    'inputClass-disabled': 'w-4 h-4 text-gray-70 bg-gray-10 border-gray-30 focus:ring-gray-50 focus:ring-1',
-    'labelClass': 'ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 select-none',
-    'labelClass-disabled': 'ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 select-none bg-gray-10'
-  }
-}
+import { normalizeString, normalizeBoolean, uid } from 'w/utilsPrivate';
 
 export default class CheckBox extends LightningElement {
   @api value = '';
@@ -17,23 +8,21 @@ export default class CheckBox extends LightningElement {
   @api indeterminate = false;
   @api required = false;
   @api disabled = false;
+  @api readonly = false;
   @api labelText = '';
   @api hideLabel = false;
   @api name = '';
   @api title;
 
   _checked = false;
-
-  get id() {
-    return 'cb-' + Math.random().toString(16);
-  }
+  id = uid('cb-');
 
   @api get checked() {
-    return this.userGroup() ? group.includes(this.value) : this._checked
+    return this.userGroup() ? this.group.includes(this.value) : this._checked
   }
 
   set checked(value) {
-    this.checked = normalizeBoolean(value);
+    this._checked = normalizeBoolean(value);
   }
 
   renderedCallback() {
@@ -43,12 +32,16 @@ export default class CheckBox extends LightningElement {
     }
   }
 
-  get inputClass() {
-    return this.disabled ? CLS.default['inputClass-disabled'] : CLS.default.inputClass;
+  get computedClass() {
+    return clsx('bx--form-item', 'bx--checkbox-wrapper');
   }
 
-  get labelClass() {
-    return this.disabled ? CLS.default['labelClass-disabled'] : CLS.default.labelClass;
+  get computedLabelClass() {
+    return clsx('bx--checkbox-label');
+  }
+
+  get computedSpanClass() {
+    return clsx('bx--checkbox-label-text', normalizeBoolean(this.hideLabel) && 'bx--visually-hidden');
   }
 
   handleFocus() {
@@ -57,13 +50,17 @@ export default class CheckBox extends LightningElement {
     this.dispatchEvent(new CustomEvent('focus'));
   }
 
-  handleBlur() {
-    this.containsFocus = false;
+  handleBlur(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
     this.dispatchEvent(new CustomEvent('blur'));
   }
 
   handleChange(event) {
-    
+    event.preventDefault();
+    event.stopPropagation();
+
     if(normalizeBoolean(this.indeterminate)) {
       const cb = this.template.querySelector('input');
       cb.indeterminate = false;

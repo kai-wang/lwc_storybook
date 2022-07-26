@@ -5,6 +5,7 @@
             class="bx--inline-notification__icon"
             aria-label={iconDescription}
             src={icon}
+            size={iconSize}
          ></w-svg-icon>
          <div class="bx--inline-notification__text-wrapper">
             <p class="bx--inline-notification__title">
@@ -26,9 +27,10 @@
             onclick={handleClose}
          >
             <w-svg-icon
-               class="bx--inline-notification__icon"
+               class="bx--inline-notification__close-icon"
                aria-label={iconDescription}
                src={closeIcon}
+               size={iconSize}
             ></w-svg-icon>
          </button>
       </template>

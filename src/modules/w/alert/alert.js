@@ -31,6 +31,7 @@ export default class Alert extends LightningElement {
   @api hideCloseButton = false;
   @api iconDescription = 'Close alert';
   @api role;
+  @api iconSize = "20";
 
   _kind = KIND.fallbackValue;
   _open = true;

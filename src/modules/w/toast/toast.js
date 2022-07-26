@@ -27,9 +27,10 @@ const ICONS = {
 export default class Alert extends LightningElement {
   @api title = '';
   @api subtitle = '';
+  @api caption = '';
   @api dark = false;
   @api hideCloseButton = false;
-  @api iconDescription = 'Close alert';
+  @api iconDescription = 'Close toast';
   @api role = 'alert';
   @api iconSize = '20';
 
@@ -54,10 +55,9 @@ export default class Alert extends LightningElement {
 
   get computedClass() {
     return clsx(
-      'bx--inline-notification',
-      !this.dark && 'bx--inline-notification--low-contrast',
-      this.hideCloseButton && 'bx--inline-notification--hide-close-button',
-      `bx--inline-notification--${this._kind}`
+      'bx--toast-notification',
+      !this.dark && 'bx--toast-notification--low-contrast',
+      `bx--toast-notification--${this._kind}`
     );
   }
 

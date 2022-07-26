@@ -1,0 +1,40 @@
+<template>
+   <div if:true={open} role={role} kind={kind} class={computedClass}>
+      <w-svg-icon
+         class="bx--toast-notification__icon"
+         aria-label={iconDescription}
+         src={icon}
+         size={iconSize}
+         fill=""
+      ></w-svg-icon>
+
+      <div class="bx--toast-notification__details">
+         <h3 class="bx--toast-notification__title">
+            <slot name="title">{title}</slot>
+         </h3>
+         <div class="bx--toast-notification__subtitle">
+            <slot name="subtitle">{subtitle}</slot>
+         </div>
+         <div class="bx--toast-notification__caption">
+            <slot name="caption">{caption}</slot>
+         </div>
+         <slot></slot>
+      </div>
+      <template if:false={hideCloseButton}>
+         <button
+            type="button"
+            aria-label={iconDescription}
+            title={iconDescription}
+            class="bx--toast-notification__close-button"
+            onclick={handleClose}
+         >
+            <w-svg-icon
+               class="bx--toast-notification__close-icon"
+               aria-label={iconDescription}
+               src={closeIcon}
+               size={iconSize}
+            ></w-svg-icon>
+         </button>
+      </template>
+   </div>
+</template>

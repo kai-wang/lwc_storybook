@@ -1,4 +1,5 @@
 import { LightningElement, api } from 'lwc';
+import LightningContextElement from 'lightning/context';
 import { clsx } from 'w/utils';
 import { normalizeString, normalizeBoolean, uid } from 'w/utilsPrivate';
 
@@ -7,14 +8,24 @@ const TYPE = {
   validValues: ['default', 'container']
 };
 
-export default class Tabs extends LightningElement {
+export default class Tabs extends LightningContextElement {
   _tabState = [];
   _type = TYPE.fallbackValue;
   _dropdownHidden = true;
+  _activeTab = 0;
 
-  @api activeTab = 0;
+  // @api activeTab = 0;
   @api autoWidth = false;
   @api triggerHref = '#';
+
+  @api get activeTab() {
+    return this._activeTab;
+  }
+
+  set activeTab(value) {
+    this._activeTab = value;
+    this.setContext({ currentActiveTab: value });
+  }
 
   @api get type() {
     return this._type;
@@ -58,55 +69,53 @@ export default class Tabs extends LightningElement {
 
   set tabs(data) {
     if (Array.isArray(data)) {
-      const selectedTabIndex = data.findIndex(tab => normalizeBoolean(tab.selected));
+      const selectedTabIndex = data.findIndex((tab) =>
+        normalizeBoolean(tab.selected)
+      );
       this.activeTab = selectedTabIndex === -1 ? 0 : selectedTabIndex;
 
-      let { autoWidth, activeTab } = this;
+      let { autoWidth, _activeTab } = this;
 
       this._tabState = data.map((tab, idx) => ({
-          label: tab.label,
-          href: normalizeBoolean(tab.href) ? tab.href : '#',
-          id: normalizeBoolean(tab.Id) ? tab.Id : uid('tab-'), // keep the old id if existing
-          selected: tab.selected,
-          disabled: tab.disabled,
-          style: normalizeBoolean(autoWidth) ? 'width: auto' : '',
-          index: idx,
-          computedClass: clsx(
-            'bx--tabs__nav-item',
-            normalizeBoolean(tab.disabled) && 'bx--tabs__nav-item--disabled',
-            (idx === activeTab) && 'bx--tabs__nav-item--selected'
-          )
+        label: tab.label,
+        href: normalizeBoolean(tab.href) ? tab.href : '#',
+        id: normalizeBoolean(tab.Id) ? tab.Id : uid('tab-'), // keep the old id if existing
+        selected: tab.selected,
+        disabled: tab.disabled,
+        style: normalizeBoolean(autoWidth) ? 'width: auto' : '',
+        index: idx,
+        computedClass: clsx(
+          'bx--tabs__nav-item',
+          normalizeBoolean(tab.disabled) && 'bx--tabs__nav-item--disabled',
+          idx === _activeTab && 'bx--tabs__nav-item--selected'
+        )
       }));
     }
     return [];
   }
 
-  updateTabState() {
-    let { activeTab } = this;
+  updateTabState(idx) {
     this._tabState.forEach((tab) => {
-      tab.selected = tab.index === activeTab;
+      tab.selected = tab.index === idx;
     });
 
     this.tabs = this._tabState;
   }
 
   updateContentState() {
-    let { activeTab } = this;
     const items = this.querySelectorAll(`*[slot='content']`);
     items.forEach((it, idx) => {
       it.index = idx;
-      it.activeTab = activeTab;
     });
   }
 
   handleTabClick(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     const idx = parseInt(event.target.getAttribute('data-id'));
     if (!Number.isNaN(idx) && this._tabState.length > idx) {
-      this.activeTab = idx;
-      this.updateTabState();
-      this.updateContentState();
+      this.updateTabState(idx);
     }
   }
 

@@ -1,21 +1,19 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 import { clsx } from 'w/utils';
 import { normalizeString, normalizeBoolean, uid } from 'w/utilsPrivate';
+import ContextProvider from 'w/tabs';
 
 export default class TabContent extends LightningElement {
+  @wire(ContextProvider.Provider) context;
+
   @api index;
   @api tabId;
   @api id = uid('tabc-');
 
-  hidden = false;
-  _activeTab;
+  _hidden = false;
 
-  @api get activeTab() {
-    return this._activeTab;
-  }
-
-  set activeTab(value) {
-    this._activeTab = value;
-    this.hidden = !(parseInt(value) === parseInt(this.index));
+  get hidden() {
+    console.log(this.index);
+    return !(parseInt(this.context?.currentActiveTab) === parseInt(this.index));
   }
 }

@@ -4,18 +4,36 @@ import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
 
 const KIND = {
   fallbackValue: 'error',
-  validValues: ['info', 'success', 'warn', 'error']
+  validValues: [
+    'error',
+    'info',
+    'info-square',
+    'success',
+    'warning',
+    'warning-alt'
+  ]
+};
+
+const ICONS = {
+  error: '/assets/custom/sprites-32.svg#error--filled',
+  'info-square': '/assets/custom/sprites-32.svg#information--square--filled',
+  info: '/assets/custom/sprites-32.svg#information--square',
+  success: '/assets/custom/sprites-32.svg#checkmark--filled',
+  warning: '/assets/custom/sprites-32.svg#warning--filled',
+  'warning-alt': '/assets/custom/sprites-32.svg#warning--alt--filled',
+  close: '/assets/custom/sprites-32.svg#close'
 };
 
 export default class Alert extends LightningElement {
-  @api prefix = 'alert';
-  @api dismissible = false;
-  @api icon = '/assets/custom/sprites-32.svg#information';
-  @api close_icon = '/assets/custom/sprites-32.svg#close';
-  @api title;
+  @api title = '';
+  @api subtitle = '';
+  @api light = false;
+  @api hideCloseButton = false;
+  @api iconDescription = 'Close alert';
+  @api role;
 
   _kind = KIND.fallbackValue;
-  _close = false;
+  _open = true;
 
   @api get kind() {
     return this._kind;
@@ -25,30 +43,35 @@ export default class Alert extends LightningElement {
     this._kind = normalizeString(value, KIND);
   }
 
+  @api get open() {
+    return this._open;
+  }
+
+  set open(value) {
+    this._open = value;
+  }
+
   get computedClass() {
     return clsx(
-      `${this.prefix}`,
-      `${this.prefix}-inline`,
-      `${this.prefix}-${this._kind}`,
-      {
-        [`${this.prefix}-hidden`]: this._close
-      }
+      'bx--inline-notification',
+      this.light && 'bx--inline-notification--low-contrast',
+      this.hideCloseButton && 'bx--inline-notification--hide-close-button',
+      `bx--inline-notification--${this._kind}`
     );
   }
 
-  get detailClass() {
-    return clsx(`${this.prefix}-inline_detail`);
+  get icon() {
+    return ICONS[`${this._kind}`];
   }
 
-  get iconClass() {
-    return clsx(`${this.prefix}-inline_icon`, `${this.prefix}-${this._kind}_icon`);
+  get closeIcon() {
+    return ICONS['close'];
   }
 
-  get closeIconClass() {
-    return clsx(`${this.prefix}-inline_close_icon`);
-  }
-
-  handleClose() {
-    this._close = true;
+  handleClose(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.dispatchEvent(new CustomEvent('close'));
+    this.open = false;
   }
 }

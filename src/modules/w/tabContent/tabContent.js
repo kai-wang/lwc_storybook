@@ -13,7 +13,6 @@ export default class TabContent extends LightningElement {
   _hidden = false;
 
   get hidden() {
-    console.log(this.index);
     return !(parseInt(this.context?.currentActiveTab) === parseInt(this.index));
   }
 }

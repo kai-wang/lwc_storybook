@@ -1,20 +1,36 @@
 <template>
-   <div data-notification class={computedClass} aria-live="false">
-      <w-svg-icon src={icon} class-name={iconClass}></w-svg-icon>
-      <div class={detailClass}>
-         <slot name="content">
-            <h3 class="title">{title}</h3>
-         </slot>
+   <div if:true={open} role={role} kind={kind} class={computedClass}>
+      <div class="bx--inline-notification__details">
+         <w-svg-icon
+            class="bx--inline-notification__icon"
+            aria-label={iconDescription}
+            src={icon}
+         ></w-svg-icon>
+         <div class="bx--inline-notification__text-wrapper">
+            <p class="bx--inline-notification__title">
+               <slot name="title">{title}</slot>
+            </p>
+            <div class="bx--inline-notification__subtitle">
+               <slot name="subtitle">{subtitle}</slot>
+            </div>
+            <slot></slot>
+         </div>
       </div>
-      <button
-         if:true={dismissible}
-         aria-label="closeAriaLabel"
-         type="button"
-         data-notification-btn
-         class={closeIconClass}
-         onclick={handleClose}
-      >
-         <w-svg-icon src={close_icon}></w-svg-icon>
-      </button>
+      <slot name="actions"></slot>
+      <template if:false={hideCloseButton}>
+         <button
+            type="button"
+            aria-label={iconDescription}
+            title={iconDescription}
+            class="bx--inline-notification__close-button"
+            onclick={handleClose}
+         >
+            <w-svg-icon
+               class="bx--inline-notification__icon"
+               aria-label={iconDescription}
+               src={closeIcon}
+            ></w-svg-icon>
+         </button>
+      </template>
    </div>
 </template>

@@ -17,7 +17,7 @@ const KIND = {
 const ICONS = {
   error: '/assets/custom/sprites-32.svg#error--filled',
   'info-square': '/assets/custom/sprites-32.svg#information--square--filled',
-  info: '/assets/custom/sprites-32.svg#information--square',
+  info: '/assets/custom/sprites-32.svg#information--square--filled',
   success: '/assets/custom/sprites-32.svg#checkmark--filled',
   warning: '/assets/custom/sprites-32.svg#warning--filled',
   'warning-alt': '/assets/custom/sprites-32.svg#warning--alt--filled',

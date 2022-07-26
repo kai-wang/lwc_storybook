@@ -1,0 +1,45 @@
+<template>
+   <div class="flex items-center">
+      <input
+         type="checkbox"
+         value={value}
+         checked={checked}
+         disabled={disabled}
+         id={id}
+         indeterminate={indeterminate}
+         name={name}
+         required={required}
+         readonly={readonly}
+         onchange={handleChange}
+         onfocus={handleFocus}
+         onblur={handleBlur}
+         class={inputClass}
+      />
+      <label for={id} class={labelClass}>{labelText}</label>
+   </div>
+
+   <!-- <div class="wx--form-item wx--checkbox-wrapper" onclick={handleClick}>
+    <input 
+      type="checkbox"
+      value={value}
+      checked={checked}
+      disabled={disabled}
+      id={id}
+      indeterminate={indeterminate}
+      name={name}
+      required={required}
+      readonly={readonly}
+      class="wx--checkbox"
+      onchange={handleChange}
+      onfocus={handleFocus}
+      onblur={handleBlur}
+    />
+    <label for={id} title={title} class="wx--checkbox-label">
+      <span
+        class="wx--checkbox-label-text"
+      >
+        {labelText}
+      </span>
+    </label>
+  </div> -->
+</template>

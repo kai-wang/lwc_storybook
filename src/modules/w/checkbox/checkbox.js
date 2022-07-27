@@ -13,6 +13,7 @@ export default class CheckBox extends LightningElement {
   @api hideLabel = false;
   @api name = '';
   @api title;
+  @api inline = false;
 
   _checked = false;
   id = uid('cb-');

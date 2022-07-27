@@ -1,22 +1,36 @@
 <template>
-   <div class={computedClass}>
-      <input
-         type="checkbox"
-         value={value}
-         checked={checked}
-         disabled={disabled}
-         id={id}
-         indeterminate={indeterminate}
-         name={name}
-         class="bx--checkbox"
-         required={required}
-         readonly={readonly}
-         onchange={handleChange}
-      />
-      <label for={id} title={title} class={computedLabelClass}>
-         <span class={computedSpanClass}>
-            <slot name="labelText">{labelText}</slot>
-         </span>
-      </label>
-   </div>
+   <template if:false={inline}>
+      <div class={computedClass}>
+         <input
+            type="checkbox"
+            value={value}
+            checked={checked}
+            disabled={disabled}
+            id={id}
+            indeterminate={indeterminate}
+            name={name}
+            class="bx--checkbox"
+            required={required}
+            readonly={readonly}
+            onchange={handleChange}
+         />
+         <label for={id} title={title} class={computedLabelClass}>
+            <span class={computedSpanClass}>
+               <slot name="labelText">{labelText}</slot>
+            </span>
+         </label>
+      </div>
+   </template>
+   <template if:true={inline}>
+      <div class="bx--checkbox--inline">
+         <input
+            type="checkbox"
+            class="bx--checkbox"
+            checked={checked}
+            indeterminate={indeterminate}
+            id={id}
+         />
+         <label for={id} title={title} class="bx--checkbox-label"></label>
+      </div>
+   </template>
 </template>

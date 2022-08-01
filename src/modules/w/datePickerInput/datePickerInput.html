@@ -1,0 +1,34 @@
+<template>
+   <div class={computedClass}>
+      <template if:true={labelText}>
+         <label for={id} class={computedLabelClass}>
+            <slot name="labelText"> {labelText} </slot>
+         </label>
+      </template>
+      <div class={computedContainerClass}>
+         <input
+            data-invalid={invalid}
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            type={type}
+            pattern={pattern}
+            disabled={disabled}
+            value={compuatedValue}
+            class={computedInputClass}
+            oninput={handleInput}
+            onchange={handleChange}
+            onkeydown={handleKeydown}
+            onblur={handleBlur}
+         />
+         <w-svg-icon
+            class="bx--date-picker__icon"
+            aria-label={iconDescription}
+            src={icon}
+            size={iconSize}
+            fill=""
+            onclick={openCalendar}
+         ></w-svg-icon>
+      </div>
+   </div>
+</template>

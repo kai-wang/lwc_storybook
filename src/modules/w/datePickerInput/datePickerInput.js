@@ -1,6 +1,7 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
 import { normalizeString, normalizeBoolean, uid } from 'w/utilsPrivate';
+import rangePlugin from '../datePicker/rangePicker';
 import { createCalendar } from './createCalendar';
 
 const SIZE = {
@@ -9,6 +10,8 @@ const SIZE = {
 };
 
 export default class DatePickerInput extends LightningElement {
+  @wire(ContextProvider.Provider) _context;
+
   @api type = 'text';
   @api placeholder = '';
   @api disabled = false;
@@ -26,6 +29,12 @@ export default class DatePickerInput extends LightningElement {
   _id = uid('dpi-');
   _pattern = '\\d{1,2}\\/\\d{1,2}\\/\\d{4}';
   _size = SIZE.fallbackValue;
+
+  _inputIds;
+
+  get context() {
+    return this._context;
+  }
 
   @api get size() {
     return this._size;
@@ -64,5 +73,50 @@ export default class DatePickerInput extends LightningElement {
       this.invalid && 'bx--date-picker__input--invalid',
       `bx--date-picker__input--${this._size}`
     );
+  }
+
+  get computedValue() {
+    { range, inputIds, inputValueFrom, inputValueTo, inputValue } = this.context;
+
+    return range
+      ? inputIds.indexOf(this._id) === 0
+        ? inputValueFrom
+        : inputValueTo
+      : inputValue;
+  }
+
+  get hasCalendar() {
+    return this.context.hasCalendar;
+  }
+
+  get computedHelperClass() {
+    return clsx(
+      'bx--form__helper-text',
+      this.disabled && 'bx--form__helper-text--disabled'
+    );
+  }
+
+  handleInput(event) {
+    console.log(event.target.value);
+  }
+
+  handleChange(event) {
+    console.log(event.target.value);
+  }
+
+  handleKeydown(event) {
+    console.log(event.target.value);
+  }
+
+  handleBlur(event) {
+    console.log(event.target.value);
+  }
+
+  openCalendar() {
+    this.context.openCalendar();
+  }
+
+  validandwarn() {
+    return !this.invalid && this.warn;
   }
 }

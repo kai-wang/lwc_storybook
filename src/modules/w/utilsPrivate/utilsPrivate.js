@@ -149,3 +149,12 @@ export function escapeHTML(html) {
 export function uid(prefix) {
     return prefix + Math.random().toString(36).substring(2, 8);
 }
+
+export function dispatch(obj, name, detail) {
+  obj.dispatchEvent(
+    new CustomEvent(name, {
+      bubbles: true,
+      detail: detail
+    })
+  );
+}

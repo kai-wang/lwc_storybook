@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
+import { dispatch } from 'w/utilsPrivate';
 
 export default class BreadcrumbItem extends LightningElement {
   @api href = '';
@@ -33,18 +34,13 @@ export default class BreadcrumbItem extends LightningElement {
     );
     this.setAttribute('role', 'listitem');
 
-    this.dispatchEvent(
-      new CustomEvent('itemregister', {
-        bubbles: true,
-        detail: {
-          callbacks: {
-            updateCurrent: (flag) => {
-              this.ariaCurrent = flag;
-            }
-          }
+    dispatch(this, 'itemregister', {
+      callbacks: {
+        updateCurrent: (flag) => {
+          this.ariaCurrent = flag;
         }
-      })
-    );
+      }
+    });
   }
 
   disconnectedCallback() {

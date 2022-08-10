@@ -21,7 +21,9 @@ export default class BreadcrumbItem extends LightningElement {
   }
 
   connectedCallback() {
-    this.connected = true;
+    if(this._connected) return;
+
+    this._connected = true;
     // add default CSS classes to custom element tag
     this.setAttribute(
       'class',
@@ -34,6 +36,6 @@ export default class BreadcrumbItem extends LightningElement {
   }
 
   disconnectedCallback() {
-    this.connected = false;
+    this._connected = false;
   }
 }

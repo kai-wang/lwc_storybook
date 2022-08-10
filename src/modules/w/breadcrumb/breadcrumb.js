@@ -1,9 +1,10 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
 
 export default class Breadcrumb extends LightningElement {
   @api noTrailingSlash = false;
+
+  _items = [];
 
   get computedClass() {
     return clsx(
@@ -12,11 +13,14 @@ export default class Breadcrumb extends LightningElement {
     );
   }
 
-  handleSlotChange() {
-    const items = this.template.querySelector('slot').assignedNodes();
+  handleItemRegister(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const item = event.detail;
 
-    items.forEach((it, idx, array) => {
-      it.ariaCurrent = idx === array.length - 1 ? 'page' : null;
+    this._items.push(item.callbacks);
+    this._items.forEach((it, idx, array) => {
+      it.updateCurrent(idx === array.length - 1 ? 'page' : null);
     });
   }
 }

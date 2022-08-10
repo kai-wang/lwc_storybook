@@ -1,7 +1,7 @@
 <template>
    <nav aria-label="Breadcrumb">
-      <ol class={computedClass} role="list">
-         <slot onslotchange={handleSlotChange}></slot>
+      <ol class={computedClass} role="list" onitemregister={handleItemRegister}>
+         <slot></slot>
       </ol>
    </nav>
 </template>

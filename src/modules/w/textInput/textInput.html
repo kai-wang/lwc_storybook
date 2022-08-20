@@ -1,0 +1,28 @@
+<template>
+   <div class={computedClass}>
+      <tempalte if:true={inline}>
+         <div class="bx--text-input__label-helper-wrapper">
+            <template if:true={hasLabelText}>
+               <label for={id} class={computedLabel}>
+                  <slot name="labelText">{labelText}</slot>
+               </label>
+            </template>
+            <template if:true={hasHelper}>
+               <div class={computedHelper}>{helperText}</div>
+            </template>
+         </div>
+      </tempalte>
+      <template if:false={inline}>
+         <label for={id} class={computedLabel}>
+            <slot name="labelText"> {labelText} </slot>
+         </label>
+      </template>
+      <div class={computedOuterWrapper}>
+         <div
+            data-invalid={invalid}
+            data-warn={warn}
+            class={computedWrapper}
+         ></div>
+      </div>
+   </div>
+</template>

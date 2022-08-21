@@ -23,7 +23,7 @@
          >
             <template if:true={invalid}>
                <w-svg-icon
-                  class="bx--text-input__invalid-icon"
+                  class-name="bx--text-input__invalid-icon"
                   src="/assets/custom/sprites-32.svg#warning--filled"
                   fill=""
                ></w-svg-icon>
@@ -31,7 +31,7 @@
 
             <template if:true={isValidAndWarn}>
                <w-svg-icon
-                  class="bx--text-input__invalid-icon bx--text-input__invalid-icon--warning"
+                  class-name="bx--text-input__invalid-icon bx--text-input__invalid-icon--warning"
                   src="/assets/custom/sprites-32.svg#warning--alt--filled"
                   fill=""
                ></w-svg-icon>
@@ -39,7 +39,7 @@
 
             <template if:true={readOnly}>
                <w-svg-icon
-                  class="bx--text-input__readonly-icon"
+                  class-name="bx--text-input__readonly-icon"
                   src="/assets/custom/sprites-32.svg#edit--off"
                   fill=""
                ></w-svg-icon>

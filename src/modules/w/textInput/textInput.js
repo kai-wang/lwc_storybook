@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
+import { normalizeString, synchronizeAttrs } from 'w/utilsPrivate';
 
 const SIZE = {
   fallbackValue: 'sm',
@@ -9,16 +9,14 @@ const SIZE = {
 
 export default class TextInput extends LightningElement {
   @api hideLabel = false;
-  @api invaild = false;
   @api invalidText = '';
 
-  @api warn = false;
   @api warnText;
 
   @api light = false;
   @api required = false;
   @api inline = false;
-  @api readonly = false;
+  @api readOnly = false;
   @api disabled = false;
 
   @api helperText = '';
@@ -28,10 +26,10 @@ export default class TextInput extends LightningElement {
   @api placeholder = '';
   @api name;
 
-  _id = 'textInput-' + Math.random().toString(16);
-  _errorId = `error-${this._id}`;
-  _warnId = `warn-${this._id}`;
+  @api id = 'textInput-' + Math.random().toString(16);
   _size = SIZE.fallbackValue;
+  _invalid = false;
+  _warn = false;
 
   @api get size() {
     return this._size;
@@ -39,6 +37,30 @@ export default class TextInput extends LightningElement {
 
   set size(value) {
     this._size = normalizeString(value, SIZE);
+  }
+
+  @api get invalid() {
+    return this._invalid;
+  }
+
+  set invalid(value) {
+    this._invalid = value;
+  }
+
+  @api get warn() {
+    return this._warn;
+  }
+
+  set warn(value) {
+    this._warn = value;
+  }
+
+  get warnId() {
+    return `warn-${this.id}`;
+  }
+
+  get errorId() {
+    return `error-${this.id}`;
   }
 
   get hasLabelText() {
@@ -53,27 +75,27 @@ export default class TextInput extends LightningElement {
     return clsx(
       'bx--form-item',
       'bx--text-input-wrapper',
-      'bx--text-input-wrapper--inline' && this.inline,
-      'bx--text-input-wrapper--light' && this.light,
-      'bx--text-input-wrapper--readonly' && this.readonly
+      this.inline && 'bx--text-input-wrapper--inline',
+      this.light && 'bx--text-input-wrapper--light',
+      this.readOnly && 'bx--text-input-wrapper--readonly'
     );
   }
 
   get computedLabelClass() {
     return clsx(
       'bx--label',
-      'bx--visually-hidden' && this.hideLabel,
-      'bx--label--disabled' && this.disabled,
-      'bx--label--inline' && this.inline,
-      `bx--label--inline-${this.size}` && this.inline
+      this.hideLabel && 'bx--visually-hidden',
+      this.disabled && 'bx--label--disabled',
+      this.inline && 'bx--label--inline',
+      `bx--label--inline--${this.size}`
     );
   }
 
   get computedHelperClass() {
     return clsx(
       'bx--form__helper-text',
-      'bx--form__helper-text--disabled' && this.disabled,
-      'bx--form__helper-text--inline' && this.inline
+      this.disabled && 'bx--form__helper-text--disabled',
+      this.inline && 'bx--form__helper-text--inline'
     );
   }
 
@@ -86,44 +108,70 @@ export default class TextInput extends LightningElement {
   }
 
   get isValidAndWarn() {
-    return !this.invaild && this.warn;
+    return !this._invaild && this._warn;
   }
 
   get ariaDescribedBy() {
-    return this.invaild ? this._errorId : this.warn ? this._warnId : undefined;
+    return this._invaild ? this.errorId : this._warn ? this.warnId : this.id;
   }
 
   get isFluidNotInlineInvalid() {
-    return this.isFluid && !this.inline && this.invalid;
+    return this.isFluid && !this.inline && this._invalid;
   }
 
   get isFluidNotInlineWarn() {
-    return this.isFluid && !this.inline && this.warn;
+    return this.isFluid && !this.inline && this._warn;
   }
 
   get isNormalHelper() {
-    return !this.invalid && !this.warn && !this.isFluid && !this.inline && !!this.helperText;
+    return (
+      !this._invalid &&
+      !this._warn &&
+      !this.isFluid &&
+      !this.inline &&
+      !!this.helperText
+    );
   }
 
   get isFluidInvalid() {
-    return this.isFluid && this.invalid;
+    return this.isFluid && this._invalid;
   }
 
   get isNotFluidValidWarn() {
-    return !this.isFluid && !this.invaild && this.warn;
+    return !this.isFluid && !this.invaild && this._warn;
   }
 
   get computedOuterWrapper() {
     return clsx(
       'bx--text-input__field-outer-wrapper',
-      'bx--text-input__field-outer-wrapper--inline' && this.inline
+      this.inline && 'bx--text-input__field-outer-wrapper--inline'
     );
   }
 
   get computedInnerWrapper() {
     return clsx(
       'bx--text-input__field-wrapper',
-      'bx--text-input__field-wrapper--warning' && !this.invalid && this.warn
+      !this._invalid && this._warn && 'bx--text-input__field-wrapper--warning'
     );
+  }
+
+  get computedInputClass() {
+    return clsx(
+      'bx--text-input',
+      this.light && 'bx--text-input--light',
+      this._invalid && 'bx--text-input--invalid',
+      this._warn && 'bx--text-input--warn',
+      `bx--text-input--${this.size}`
+    );
+  }
+
+  renderedCallback() {
+    const elm = this.template.querySelector('.bx--text-input__field-wrapper');
+    const inp = this.template.querySelector('input');
+    synchronizeAttrs(elm, { 'data-warn': this._warn, 'data-invalid': this._invalid } );
+    synchronizeAttrs(inp, { 'data-warn': this._warn, 'data-invalid': this._invalid, 'aria-invalid': this._invalid } );
+
+    console.log(this.template.querySelector('input'));
+
   }
 }

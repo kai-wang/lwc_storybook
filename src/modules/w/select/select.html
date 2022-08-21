@@ -1,0 +1,67 @@
+<template>
+   <div class={computedClass}>
+      <label if:true={hasLabelText} for={id} class={computedLabelClass}>
+         <slot name="labelText"> {labelText} </slot>
+      </label>
+      <div if:true={inline} class="bx--select-input--inline__wrapper">
+         <div class="bx--select-input__wrapper">
+            <select
+               id={id}
+               name={name}
+               class={computedSelectClass}
+               onchange={handleChange}
+            ></select>
+            <w-svg-icon
+               class-name="bx--select__arrow"
+               src="/assets/custom/sprites-32.svg#chevron--down"
+            ></w-svg-icon>
+            <template if:true={invalid}>
+               <w-svg-icon
+                  class-name="bx--select__invalid-icon"
+                  src="/assets/custom/sprites-32.svg#warning--filled"
+               ></w-svg-icon>
+            </template>
+         </div>
+         <template if:true={invalid}>
+            <div class="bx--form-requirement" id={errorId}>{invalidText}</div>
+         </template>
+      </div>
+      <template if:true={hasHelperText}>
+         <div class={computedHelperClass}>{helperText}</div>
+      </template>
+      <div if:false={inline} class="bx--select-input__wrapper">
+         <select
+            id={id}
+            name={name}
+            class={computedSelectClass}
+            onchange={handleChange}
+         ></select>
+         <w-svg-icon
+            class-name="bx--select__arrow"
+            src="/assets/custom/sprites-32.svg#chevron--down"
+         ></w-svg-icon>
+         <template if:true={invalid}>
+            <w-svg-icon
+               class-name="bx--select__invalid-icon"
+               src="/assets/custom/sprites-32.svg#warning--filled"
+            ></w-svg-icon>
+         </template>
+         <template if:true={isValidAndWarn}>
+            <w-svg-icon
+               class-name="bx--select__invalid-icon bx--select__invalid-icon--warning"
+               src="/assets/custom/sprites-32.svg#warning--alt--filled"
+            ></w-svg-icon>
+         </template>
+      </div>
+
+      <div if:true={isValidAndHelperText} class={computedHelperClass}>
+         {helperText}
+      </div>
+
+      <div if:true={invalid} class="bx--form-requirement">{invalidText}</div>
+
+      <div if:true={isValidAndWarn} id={errorId} class="bx--form-requirement">
+         {warnText}
+      </div>
+   </div>
+</template>

@@ -3,17 +3,17 @@
       <tempalte if:true={inline}>
          <div class="bx--text-input__label-helper-wrapper">
             <template if:true={hasLabelText}>
-               <label for={id} class={computedLabel}>
+               <label for={_id} class={computedLabelClass}>
                   <slot name="labelText">{labelText}</slot>
                </label>
             </template>
-            <template if:true={hasHelper}>
-               <div class={computedHelper}>{helperText}</div>
+            <template if:true={isNotFluidHelper}>
+               <div class={computedHelperClass}>{helperText}</div>
             </template>
          </div>
       </tempalte>
-      <template if:false={inline}>
-         <label for={id} class={computedLabel}>
+      <template if:true={isNotInlineLabel}>
+         <label for={_id} class={computedLabelClass}>
             <slot name="labelText"> {labelText} </slot>
          </label>
       </template>
@@ -21,8 +21,77 @@
          <div
             data-invalid={invalid}
             data-warn={warn}
-            class={computedWrapper}
-         ></div>
+            class={computedInnerWrapper}
+         >
+            <template if:true={invalid}>
+               <w-svg-icon
+                  class="bx--text-input__invalid-icon"
+                  src="/assets/custom/sprites-32.svg#warning--filled"
+               ></w-svg-icon>
+            </template>
+
+            <template if:true={isValidAndWarn}>
+               <w-svg-icon
+                  class="bx--text-input__invalid-icon bx--text-input__invalid-icon--warning"
+                  src="/assets/custom/sprites-32.svg#warning--alt--filled"
+               ></w-svg-icon>
+            </template>
+
+            <template if:true={readonly}>
+               <w-svg-icon
+                  class="bx--text-input__readonly-icon"
+                  src="/assets/custom/sprites-32.svg#edit--off"
+               ></w-svg-icon>
+            </template>
+
+            <input
+               data-invalid={invalid}
+               aria-invalid={invalid}
+               data-warn={warn}
+               aria-describedby={ariaDescribedBy}
+               disabled={disabled}
+               id={_id}
+               name={name}
+               placeholder={placeholder}
+               class={computedInputClass}
+            />
+
+            <hr if:true={isFluid} class="bx--text-input__divider" />
+            <div
+               if:true={isFluidNotInlineInvalid}
+               class="bx--form-requirement"
+               id={_errorId}
+            >
+               {invalidText}
+            </div>
+            <div
+               if:true={isFluidNotInlineWarn}
+               class="bx--form-requirement"
+               id={_warnId}
+            >
+               {warnText}
+            </div>
+         </div>
+
+         <div if:true={isNormalHelper} class={computedNormalHelperTextClass}>
+            {helperText}
+         </div>
+
+         <div
+            if:true={isFluidInvalid}
+            class="bx--form-requirement"
+            id={_errorId}
+         >
+            {invalidText}
+         </div>
+
+         <div
+            if:true={isNotFluidValidWarn}
+            class="bx--form-requirement"
+            id={_warnId}
+         >
+            {warnText}
+         </div>
       </div>
    </div>
 </template>

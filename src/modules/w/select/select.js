@@ -11,8 +11,6 @@ export default class Select extends LightningElement {
   @api hideLabel = false;
   @api invalidText = '';
 
-  @api warnText;
-
   @api light = false;
   @api required = false;
   @api inline = false;
@@ -30,6 +28,7 @@ export default class Select extends LightningElement {
   _size = SIZE.fallbackValue;
   _invalid = false;
   _warn = false;
+  @api selected;
 
   @api options = [];
 
@@ -131,7 +130,9 @@ export default class Select extends LightningElement {
       'disabled': this.disabled,
       'required': this.required
     });
+  }
 
-    console.log(this.template.querySelector('input'));
+  handleChange(event) {
+    this.selected = event.target.value;
   }
 }

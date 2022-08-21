@@ -32,6 +32,7 @@
                <w-svg-icon
                   class-name="bx--select__invalid-icon"
                   src="/assets/custom/sprites-32.svg#warning--filled"
+                  fill=""
                ></w-svg-icon>
             </template>
          </div>
@@ -68,14 +69,16 @@
          ></w-svg-icon>
          <template if:true={invalid}>
             <w-svg-icon
-               class-name="bx--select__invalid-icon"
+               class="bx--select__invalid-icon"
                src="/assets/custom/sprites-32.svg#warning--filled"
+               fill=""
             ></w-svg-icon>
          </template>
          <template if:true={isValidAndWarn}>
             <w-svg-icon
-               class-name="bx--select__invalid-icon bx--select__invalid-icon--warning"
+               class="bx--select__invalid-icon bx--select__invalid-icon--warning"
                src="/assets/custom/sprites-32.svg#warning--alt--filled"
+               fill=""
             ></w-svg-icon>
          </template>
       </div>

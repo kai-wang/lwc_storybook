@@ -1,0 +1,11 @@
+<template>
+   <fieldset class={computedClass}>
+      <legend if:true={hasLegendText} class="bx--label">
+         {legendText}
+      </legend>
+      <slot></slot>
+      <div if:true={hasMessage} class="bx--form__requirement">
+         {messageText}
+      </div>
+   </fieldset>
+</template>

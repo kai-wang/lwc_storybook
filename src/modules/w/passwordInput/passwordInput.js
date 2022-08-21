@@ -225,7 +225,5 @@ export default class PasswordInput extends LightningElement {
       'data-invalid': this._invalid,
       'aria-invalid': this._invalid
     });
-
-    console.log(this.template.querySelector('input'));
   }
 }

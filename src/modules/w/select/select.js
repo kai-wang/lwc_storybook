@@ -31,6 +31,8 @@ export default class Select extends LightningElement {
   _invalid = false;
   _warn = false;
 
+  @api options = [];
+
   @api get size() {
     return this._size;
   }

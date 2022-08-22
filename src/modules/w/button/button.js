@@ -45,6 +45,7 @@ export default class Button extends LightningElement {
   _size = SIZE.fallbackValue;
   _tooltipPosition = TOOLTIP_POSITION.fallbackValue;
   _tooltipAlignment = TOOLTIP_ALIGNMENT.fallbackValue;
+  _type = TYPE.fallbackValue;
 
   @api expressive = false;
   @api isSelected = false;
@@ -55,6 +56,14 @@ export default class Button extends LightningElement {
   @api customClass;
   @api iconOnly = false;
 
+  @api get type() {
+    return this._type;
+  }
+
+  @api set type(value) {
+    this._type = normalizeString(value, TYPE);
+  }
+  
   @api get kind() {
     return this._kind;
   }

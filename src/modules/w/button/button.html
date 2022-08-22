@@ -23,7 +23,7 @@
    </template>
    <template if:false={link}>
       <button
-         type="button"
+         type={type}
          disabled={disabled}
          aria-pressed={ariaPressed}
          onclick={handleClick}
@@ -35,14 +35,6 @@
          <template if:false={iconOnly}>
             <slot></slot>
          </template>
-         <!-- <lightning-icon
-            if:true={hasIcon}
-            class="bx--btn__icon"
-            src={icon}
-            aria-hidden="true"
-            size="small"
-            aria-label={iconDescription}
-         ></lightning-icon> -->
          <w-svg-icon
             if:true={hasIcon}
             src={icon}

@@ -170,8 +170,5 @@ export default class TextInput extends LightningElement {
     const inp = this.template.querySelector('input');
     synchronizeAttrs(elm, { 'data-warn': this._warn, 'data-invalid': this._invalid } );
     synchronizeAttrs(inp, { 'data-warn': this._warn, 'data-invalid': this._invalid, 'aria-invalid': this._invalid } );
-
-    console.log(this.template.querySelector('input'));
-
   }
 }

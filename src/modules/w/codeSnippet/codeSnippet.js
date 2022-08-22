@@ -9,7 +9,10 @@ const TYPE = {
 
 export default class CodeSnippet extends LightningElement {
   _type = TYPE.fallbackValue;
+  _timeout;
+  _animation;
 
+  @api inline = false;
   @api expanded = false;
   @api hideCopyButton = false;
   @api disabled = false;
@@ -65,8 +68,11 @@ export default class CodeSnippet extends LightningElement {
     if (height > 0) this.showMoreLess = height > 255;
   }
 
-  toggleExpand() {
+  toggle() {
     if (this._type === 'multi') {
+      if (this.code === undefined) this.toggleMoreLess();
+      if (this.code) this.toggleMoreLess();
+
       const elm = this.template.querySelector('.bx--snippet-container');
       synchronizeAttrs(elm, {
         role: this.type === 'single' ? 'textbox' : undefined,
@@ -74,13 +80,6 @@ export default class CodeSnippet extends LightningElement {
         'aria-label': this.copyLabel || 'code-snippet',
         style: `width: 100%; min-height: ${this.minHeight}px; max-height: ${this.maxHeight}`
       });
-    }
-  }
-
-  toggle() {
-    if (this._type === 'multi') {
-      if (this.code === undefined) this.toggleMoreLess();
-      if (this.code) this.toggleMoreLess();
     }
   }
 
@@ -99,9 +98,9 @@ export default class CodeSnippet extends LightningElement {
     return clsx(
       'bx--copy',
       'bx--btn--copy',
-      this.animation && 'bx--copy-btn--animating',
-      this.animation === 'fade-in' && 'bx--copy-btn--fade-in',
-      this.animation === 'fade-out' && 'bx--copy-btn--fade-out',
+      this._animation && 'bx--copy-btn--animating',
+      this._animation === 'fade-in' && 'bx--copy-btn--fade-in',
+      this._animation === 'fade-out' && 'bx--copy-btn--fade-out',
       'bx--snippet',
       this.type === 'inline' && 'bx--snippet--inline',
       this.expanded && 'bx--snippet--expand',
@@ -122,19 +121,25 @@ export default class CodeSnippet extends LightningElement {
     );
   }
 
-  handleClick() {
-    this.copy(this.code);
-    this.dispatchEvent(new CustomEvent('copy'));
-    if (this.animation === 'fade-in') return;
-    this.animation = 'fade-in';
-    this.timeout = setTimeout(() => {
-      this.animation = 'fade-out';
+  handleClick(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (this.code !== undefined) {
+      this.copy(this.code);
+      this.dispatchEvent(new CustomEvent('copy'));
+    }
+
+    if (this._animation === 'fade-in') return;
+    this._animation = 'fade-in';
+    this._timeout = setTimeout(() => {
+      this._animation = 'fade-out';
     }, this.feedbackTimeout);
   }
 
   handleAnimationEnd(event) {
     if (event.animationName === 'hide-feedback') {
-      this.animation = undefine;
+      this._animation = undefine;
     }
   }
 
@@ -143,7 +148,6 @@ export default class CodeSnippet extends LightningElement {
     event.preventDefault();
     this.expanded = !this.expanded;
     this.toggle();
-    this.toggleExpand();
   }
 
   renderedCallback() {
@@ -151,7 +155,7 @@ export default class CodeSnippet extends LightningElement {
     this._connected = true;
 
     if (!this.inline) {
-      this.toggleExpand();
+      this.toggle();
     }
 
     this.toggleMoreLess();

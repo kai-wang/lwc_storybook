@@ -1,0 +1,23 @@
+<template>
+   <button
+      type="button"
+      aria-live="polite"
+      class={computedClass}
+      aria-label={iconDescription}
+      title={iconDescription}
+      onclick={handleClick}
+      onanimationend={handleAnimationEnd}
+   >
+      <w-svg-icon
+         class-name="bx--snippet__icon"
+         src="/assets/custom/sprites-32.svg#copy"
+         fill=""
+      ></w-svg-icon>
+      <span
+         aria-hidden="true"
+         class="bx--assistive-text bx--copy-btn__feedback"
+      >
+         {feedback}
+      </span>
+   </button>
+</template>

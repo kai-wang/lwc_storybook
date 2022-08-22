@@ -60,10 +60,10 @@ export default class Button extends LightningElement {
     return this._type;
   }
 
-  @api set type(value) {
+  set type(value) {
     this._type = normalizeString(value, TYPE);
   }
-  
+
   @api get kind() {
     return this._kind;
   }

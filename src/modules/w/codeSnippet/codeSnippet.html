@@ -1,0 +1,55 @@
+<template>
+   <template if:true={inline}>
+      <span if:true={hideCopyButton} class={computedInlineClass}>
+         <code id={id}>
+            <slot>{code}</slot>
+         </code>
+      </span>
+      <button
+         if:false={hideCopyButton}
+         type="button"
+         aria-live="polite"
+         class={computedBtnClass}
+         onclick={handleClick}
+         onanimationend={handleAnimationEnd}
+      >
+         <code id={id}><slot>{code}</slot></code>
+         <span
+            aria-hidden="true"
+            class="bx--assistive-text bx--copy-btn__feedback"
+            >{feedback}</span
+         >
+      </button>
+   </template>
+   <template if:false={inline}>
+      <div class={computedClass}>
+         <div class="bx--snippet-container">
+            <pre><code><slot>{code}</slot></code></pre>
+         </div>
+         <template if:false={hideCopyButton}>
+            <w-copy-button
+               text={code}
+               feedback={feedback}
+               feedback-timeout={feedbackTimeout}
+               icon-description={copyButtonDescription}
+            ></w-copy-button>
+         </template>
+         <template if:true={showMoreLess}>
+            <w-button
+               kind="ghost"
+               size="small"
+               class="bx--snippet-btn--expand"
+               disabled={disabled}
+               onclick={handleShowMoreLess}
+            >
+               <span class="bx--snippet-btn--text">{expandText}</span>
+               <w-svg-icon
+                  class="bx--icon-chevron--down bx--snippet__icon"
+                  aria-label={expandText}
+                  src="/assets/custom/sprites-32.svg#chevron--down"
+               ></w-svg-icon>
+            </w-button>
+         </template>
+      </div>
+   </template>
+</template>

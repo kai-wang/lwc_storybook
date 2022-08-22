@@ -146,6 +146,8 @@ export default class Button extends LightningElement {
   }
 
   handleClick(event) {
+    event.preventDefault();
+    event.stopPropagation();
     this.dispatchEvent(new CustomEvent('click'));
   }
 }

@@ -6,7 +6,7 @@
             value={value}
             checked={checked}
             disabled={disabled}
-            id={id}
+            id={_id}
             indeterminate={indeterminate}
             name={name}
             class="bx--checkbox"
@@ -14,7 +14,7 @@
             readonly={readonly}
             onchange={handleChange}
          />
-         <label for={id} title={title} class={computedLabelClass}>
+         <label for={_id} title={title} class={computedLabelClass}>
             <span class={computedSpanClass}>
                <slot name="labelText">{labelText}</slot>
             </span>
@@ -28,9 +28,9 @@
             class="bx--checkbox"
             checked={checked}
             indeterminate={indeterminate}
-            id={id}
+            id={_id}
          />
-         <label for={id} title={title} class="bx--checkbox-label"></label>
+         <label for={_id} title={title} class="bx--checkbox-label"></label>
       </div>
    </template>
 </template>

@@ -15,7 +15,7 @@ export default class CheckBox extends LightningElement {
   @api inline = false;
 
   _checked = false;
-  id = uid('cb-');
+  _id = uid('cb-');
 
   @api get checked() {
     return this.userGroup() ? this.group.includes(this.value) : this._checked

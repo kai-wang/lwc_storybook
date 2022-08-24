@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, synchronizeAttrs } from 'w/utilsPrivate';
+import { normalizeString, synchronizeAttrs, uid } from 'w/utilsPrivate';
 
 const TYPE = {
   fallbackValue: 'single',
@@ -27,7 +27,7 @@ export default class CodeSnippet extends LightningElement {
   @api showMoreLess = false;
   @api code;
 
-  @api id = 'cs-' + Math.random().toString(16);
+  @api id = uid('cs-');
 
   @api get type() {
     return this._type;

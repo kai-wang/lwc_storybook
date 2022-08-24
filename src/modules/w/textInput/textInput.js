@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, synchronizeAttrs } from 'w/utilsPrivate';
+import { normalizeString, synchronizeAttrs, uid } from 'w/utilsPrivate';
 
 const SIZE = {
   fallbackValue: 'sm',
@@ -26,7 +26,7 @@ export default class TextInput extends LightningElement {
   @api placeholder = '';
   @api name;
 
-  @api id = 'textInput-' + Math.random().toString(16);
+  @api id = uid('textInput-');
   _size = SIZE.fallbackValue;
   _invalid = false;
   _warn = false;

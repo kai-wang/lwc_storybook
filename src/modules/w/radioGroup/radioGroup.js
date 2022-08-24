@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
+import { normalizeString, normalizeBoolean, uid } from 'w/utilsPrivate';
 
 const LABEL_POSITION = {
   fallbackValue: 'right',
@@ -18,7 +18,7 @@ export default class RadioGroup extends LightningElement {
   @api legendText = '';
   @api hideLegend = false;
 
-  @api id = 'rg-' + Math.random().toString(16);
+  @api id = uid('rg-');
 
   _labelPosition = LABEL_POSITION.fallbackValue;
   _orientation = ORIENTATION.fallbackValue;
@@ -53,7 +53,7 @@ export default class RadioGroup extends LightningElement {
         value: option.value,
         checked: normalizeBoolean(option.checked),
         disabled: normalizeBoolean(option.disabled),
-        id: 'radio-' + Math.random().toString(16)
+        id: uid('radio-')
       }));
     }
     return [];

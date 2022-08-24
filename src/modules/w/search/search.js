@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
+import { normalizeString, normalizeBoolean, uid } from 'w/utilsPrivate';
 
 const SIZE = {
   fallbackValue: 'xl',
@@ -20,7 +20,7 @@ export default class Search extends LightningElement {
   @api className;
 
   _size = SIZE.fallbackValue;
-  _id = 'sc-' + Math.random().toString(16);
+  _id = uid('sc-');
   _expanded = false;
 
   @api get size() {

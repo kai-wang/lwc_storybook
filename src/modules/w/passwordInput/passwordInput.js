@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, synchronizeAttrs } from 'w/utilsPrivate';
+import { normalizeString, synchronizeAttrs, uid } from 'w/utilsPrivate';
 
 const SIZE = {
   fallbackValue: 'sm',
@@ -40,7 +40,7 @@ export default class PasswordInput extends LightningElement {
   @api tooltipPosition = TOOLTIP_POSITION.fallbackValue;
   @api type = 'password';
 
-  @api id = 'pwdInput-' + Math.random().toString(16);
+  @api id = uid('pwd-');
   _size = SIZE.fallbackValue;
   _invalid = false;
   _warn = false;

@@ -1,6 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { clsx } from 'w/utils';
-import { dispatch } from 'w/utilsPrivate';
+import { clsx, dispatch } from 'w/utils';
 
 export default class BreadcrumbItem extends LightningElement {
   @api href = '';

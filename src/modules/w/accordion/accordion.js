@@ -1,6 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
+import { clsx, normalizeString } from 'w/utils';
 
 const SIZE = {
   fallbackValue: 'sm',

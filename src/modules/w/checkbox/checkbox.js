@@ -1,6 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean, uid } from 'w/utilsPrivate';
+import { clsx, normalizeBoolean, uid } from 'w/utils';
 
 export default class CheckBox extends LightningElement {
   @api value = '';

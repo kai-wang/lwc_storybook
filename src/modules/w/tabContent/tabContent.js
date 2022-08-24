@@ -1,5 +1,5 @@
 import { LightningElement, api, wire } from 'lwc';
-import { uid } from 'w/utilsPrivate';
+import { uid } from 'w/utils';
 import ContextProvider from 'w/tabs';
 
 export default class TabContent extends LightningElement {

@@ -1,6 +1,6 @@
 import { createElement } from 'lwc';
 import Alert from 'w/alert';
-import {normalizeBoolean} from 'w/utilsPrivate';
+import {normalizeBoolean} from 'w/utils';
 
 describe('w-alert', () => {
   afterEach(() => {

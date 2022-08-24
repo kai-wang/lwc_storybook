@@ -1,7 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import LightningContextElement from 'lightning/context';
-import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean, uid } from 'w/utilsPrivate';
+import { clsx, normalizeString, normalizeBoolean, uid } from 'w/utils';
 
 const TYPE = {
   fallbackValue: 'default',

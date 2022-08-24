@@ -1,6 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { clsx } from 'w/utils';
-import { synchronizeAttrs } from 'w/utilsPrivate';
+import { clsx, synchronizeAttrs } from 'w/utils';
 
 export default class Form extends LightningElement {
   @api legendText;

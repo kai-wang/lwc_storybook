@@ -1,6 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { clsx } from 'w/utils';
-import { normalizeString, synchronizeAttrs } from 'w/utilsPrivate';
+import { normalizeString, clsx } from 'w/utils';
 
 const ANIMATION = {
   fallbackValue: 'fade-in',

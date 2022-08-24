@@ -1,6 +1,5 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
 
 export default class Test extends LightningElement {
   @api title = 'title';

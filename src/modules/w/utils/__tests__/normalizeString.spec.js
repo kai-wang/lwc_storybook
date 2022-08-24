@@ -5,7 +5,7 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/MIT
  */
 
-import { normalizeString as normalize } from 'c/utilsPrivate';
+import { normalizeString as normalize } from 'w/utils';
 
 it('Passes through lowercased values when configuration undefined', () => {
     expect(normalize('foo')).toBe('foo');

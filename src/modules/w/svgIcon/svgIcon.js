@@ -1,6 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { clsx } from 'w/utils';
-import { synchronizeAttrs } from 'w/utilsPrivate';
+import { clsx, synchronizeAttrs } from 'w/utils';
 
 export default class SvgIcon extends LightningElement {
   @api title;
@@ -12,7 +11,7 @@ export default class SvgIcon extends LightningElement {
   @api ariaHidden = "true";
   @api fill = 'currentColor';
   @api role = 'img';
-
+  
   get computedClass() {
     return clsx(`${this.className}`);
   }
@@ -20,7 +19,7 @@ export default class SvgIcon extends LightningElement {
   get focusable() {
     return this.tabIndex === 0 ? true : undefined;
   }
-
+  
   connectedCallback() {
     const svg = this.template.querySelector('svg');
     synchronizeAttrs(svg, {

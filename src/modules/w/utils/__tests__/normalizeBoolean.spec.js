@@ -5,7 +5,7 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/MIT
  */
 
-import { normalizeBoolean as normalize } from 'c/utilsPrivate';
+import { normalizeBoolean as normalize } from 'w/utils';
 
 it('Returns true for an empty string', () => {
     expect(normalize('')).toBe(true);

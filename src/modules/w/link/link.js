@@ -1,6 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean } from 'w/utilsPrivate';
+import { clsx, normalizeString, normalizeBoolean } from 'w/utils';
 
 const SIZE = {
   fallbackValue: 'lg',
@@ -30,7 +29,7 @@ export default class Link extends LightningElement {
   @api get out() {
     return this._out;
   }
-  
+
   set out(value) {
     this._out = normalizeBoolean(value);
     if(this._out)

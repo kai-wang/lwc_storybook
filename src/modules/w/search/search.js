@@ -1,5 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { clsx, normalizeString, normalizeBoolean, uid } from 'w/utils';
+import { clsx, normalizeString, normalizeBoolean, uid, keyCodes } from 'w/utils';
 
 const SIZE = {
   fallbackValue: 'xl',
@@ -80,7 +80,7 @@ export default class Search extends LightningElement {
 
   handleKeydown(event) {
     // if Esc is pressed
-    if (event.keyCode === 27) {
+    if (event.keyCode === keyCodes.escape) {
       this.value = '';
       this.dispatchClear();
     }

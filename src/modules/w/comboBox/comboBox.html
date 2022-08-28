@@ -1,0 +1,171 @@
+<template>
+   <div class="bx--list-box__wrapper">
+      <label if:true={titleText} for={_id} class={computedLabelClass}>
+         {titleText}
+      </label>
+      <!-- listbox container -->
+      <div
+         role="listbox"
+         tabindex="-1"
+         class={computedListBoxClass}
+         onkeydown={handleKeyDown}
+      >
+         <!-- listbox field -->
+         <div
+            role="button"
+            class="bx--list-box__field"
+            id={_id}
+            onclick={handleClick}
+         >
+            <input
+               tabindex="0"
+               autocomplete="off"
+               aria-autocomplete="list"
+               aria-expanded={open}
+               aria-disabled={disabled}
+               disabled={disabled}
+               placeholder={placeholder}
+               name={name}
+               class={computedInputClass}
+               oninput={handleInput}
+               onkeydown={handleKeyDown}
+               onblur={handleBlur}
+            />
+            <template if:true={invalid}>
+               <w-svg-icon
+                  class-name="bx--list-box__invalid-icon"
+                  src="/assets/custom/sprites-32.svg#warning--filled"
+                  fill=""
+               ></w-svg-icon>
+            </template>
+            <template if:true={validWarn}>
+               <w-svg-icon
+                  class-name="bx--list-box__invalid-icon bx--list-box__invalid-icon--warning"
+                  src="/assets/custom/sprites-32.svg#warning--alt--filled"
+                  fill=""
+               ></w-svg-icon>
+            </template>
+            <div class={computedIconClass}>
+               <w-svg-icon
+                  aria-label={description}
+                  title={description}
+                  src="/assets/custom/sprites-32.svg#chevron--down"
+               ></w-svg-icon>
+            </div>
+         </div>
+
+         <!-- list items -->
+         <template if:true={open}>
+          <div role="listbox" aria-label={ariaLabel} class="bx--list-box__menu" id={_id}>
+            <template for:each={items} for:item="item">
+              <w-list-box-menu-item
+                 key={item.id}
+                 id={item.id}
+                 index={item.id}
+                 active={item.active}
+                 highlighted={item.highlighted}
+                 disabled={item.disabled}
+                 onselect={handleSelect}
+              >
+                 {item.text}
+              </w-list-box-menu-item>
+           </template>
+          </div>
+
+            <!-- <w-list-box-menu aria-label={ariaLabel} id={_id}>
+               <template for:each={items} for:item="item">
+                  <w-list-box-menu-item
+                     key={item.id}
+                     id={item.id}
+                     active={item.active}
+                     highlighted={item.highlighted}
+                     disabled={item.disabled}
+                  >
+                     {item.text}
+                  </w-list-box-menu-item>
+               </template>
+            </w-list-box-menu> -->
+         </template>
+      </div>
+      <div if:true={invalid} class="bx--form-requirement">{invalidText}</div>
+      <div if:true={validWarn} class="bx--form-requirement">{warnText}</div>
+
+      <!-- <w-list-box
+         class={computedListBoxClass}
+         id={_comboId}
+         aria-label={ariaLabel}
+         invalid={invalid}
+         invalid-text={invalidText}
+         open={open}
+         light={light}
+         size={size}
+         warn={warn}
+         warn-text={warnText}
+      >
+         <w-list-box-field
+            role="button"
+            aria-expanded={open}
+            id={_id}
+            disabled={disabled}
+            translate-with-id={translateWithId}
+         >
+            <input
+               tabindex="0"
+               autocomplete="off"
+               aria-autocomplete="list"
+               aria-expanded={open}
+               aria-activedescendant={highlightedId}
+               aria-labelledby={comboId}
+               aria-disabled={disabled}
+               disabled={disabled}
+               placeholder={placeholder}
+               id={_id}
+               name={name}
+               class={computedInputClass}
+               oninput={handleInput}
+               onkeydown={handleKeyDown}
+               onblur={handleBlur}
+            />
+            <template if:true={invalid}>
+               <w-svg-icon
+                  class-name="bx--list-box__invalid-icon"
+                  src="/assets/custom/sprites-32.svg#warning--filled"
+                  fill=""
+               ></w-svg-icon>
+            </template>
+            <template if:true={validWarn}>
+               <w-svg-icon
+                  class-name="bx--list-box__invalid-icon bx--list-box__invalid-icon--warning"
+                  src="/assets/custom/sprites-32.svg#warning--alt--filled"
+                  fill=""
+               ></w-svg-icon>
+            </template>
+            <div class={computedIconClass}>
+              <w-svg-icon
+                 aria-label={description}
+                 title={description}
+                 src="/assets/custom/sprites-32.svg#chevron--down"
+              ></w-svg-icon>
+           </div>
+         </w-list-box-field>
+         <template if:false={open}>
+            <w-list-box-menu aria-label={ariaLabel} id={_id}>
+               <template for:each={items} for:item="item">
+                  <w-list-box-menu-item
+                     key={item.id}
+                     id={item.id}
+                     active={item.active}
+                     highlighted={item.highlighted}
+                     disabled={item.disabled}
+                  >
+                     {item.text}
+                  </w-list-box-menu-item>
+               </template>
+            </w-list-box-menu>
+         </template>
+      </w-list-box> -->
+      <div if:true={validHelperNotWarn} class={computedHelperClass}>
+         {helperText}
+      </div>
+   </div>
+</template>

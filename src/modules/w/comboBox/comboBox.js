@@ -235,9 +235,7 @@ export default class ComboBox extends LightningElement {
     } else if (index >= _items.length) {
       index = 0;
     }
-
-    console.log('change', index);
-
+    
     // let disabled = this.items[index].disabled;
     // while(disabled) {
     //   index = index + dir;

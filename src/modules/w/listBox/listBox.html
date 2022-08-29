@@ -1,0 +1,14 @@
+<template>
+   <div
+      role="listbox"
+      tabindex="-1"
+      class={computedClass}
+      onkeydown={handleKeyDown}
+      onclick={handleClick}
+   >
+   <slot></slot>
+  </div>
+  <div if:true={invalid} class="bx--form-requirement">{invalidText}</div>
+  <div if:true={validWarn} class="bx--form-requirement">{warnText}</div>
+
+</template>

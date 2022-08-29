@@ -19,6 +19,7 @@
          >
             <input
                tabindex="0"
+               value={value}
                autocomplete="off"
                aria-autocomplete="list"
                aria-expanded={open}
@@ -33,18 +34,30 @@
             />
             <template if:true={invalid}>
                <w-svg-icon
-                  class-name="bx--list-box__invalid-icon"
+                  class="bx--list-box__invalid-icon"
                   src="/assets/custom/sprites-32.svg#warning--filled"
                   fill=""
                ></w-svg-icon>
             </template>
             <template if:true={validWarn}>
                <w-svg-icon
-                  class-name="bx--list-box__invalid-icon bx--list-box__invalid-icon--warning"
+                  class="bx--list-box__invalid-icon bx--list-box__invalid-icon--warning"
                   src="/assets/custom/sprites-32.svg#warning--alt--filled"
                   fill=""
                ></w-svg-icon>
             </template>
+            <div
+               if:true={value}
+               role="button"
+               class="bx--list-box__selection"
+               onclick={handleClear}
+               onkeydown={handleClearKeyDown}
+            >
+               <w-svg-icon
+                  src="/assets/custom/sprites-32.svg#close"
+                  fill=""
+               ></w-svg-icon>
+            </div>
             <div class={computedIconClass}>
                <w-svg-icon
                   aria-label={description}
@@ -56,21 +69,26 @@
 
          <!-- list items -->
          <template if:true={open}>
-          <div role="listbox" aria-label={ariaLabel} class="bx--list-box__menu" id={_id}>
-            <template for:each={items} for:item="item">
-              <w-list-box-menu-item
-                 key={item.id}
-                 id={item.id}
-                 index={item.id}
-                 active={item.active}
-                 highlighted={item.highlighted}
-                 disabled={item.disabled}
-                 onselect={handleSelect}
-              >
-                 {item.text}
-              </w-list-box-menu-item>
-           </template>
-          </div>
+            <div
+               role="listbox"
+               aria-label={ariaLabel}
+               class="bx--list-box__menu"
+               id={_id}
+            >
+               <template for:each={items} for:item="item">
+                  <w-list-box-menu-item
+                     key={item.id}
+                     id={item.id}
+                     index={item.id}
+                     active={item.active}
+                     highlighted={item.highlighted}
+                     disabled={item.disabled}
+                     onselect={handleSelect}
+                  >
+                     {item.text}
+                  </w-list-box-menu-item>
+               </template>
+            </div>
 
             <!-- <w-list-box-menu aria-label={ariaLabel} id={_id}>
                <template for:each={items} for:item="item">

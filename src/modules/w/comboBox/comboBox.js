@@ -18,7 +18,6 @@ const SIZE = {
 };
 
 export default class ComboBox extends LightningElement {
-  @api items = [];
   @api selectedId;
   @api value = '';
   @api disabled = false;
@@ -39,6 +38,7 @@ export default class ComboBox extends LightningElement {
   _highlightedIndex = -1;
   _highlightedId;
   _selectedItem;
+  _items = [];
   _filteredItems = [];
 
   _prevSelectedId;
@@ -48,6 +48,15 @@ export default class ComboBox extends LightningElement {
   _inputId = uid('input-');
   _menuId = uid('menu-');
   _comboId = uid('combo-');
+
+  @api get items() {
+    return this._items;
+  }
+
+  set items(value) {
+    this._items = value;
+    this._filteredItems = value;
+  }
 
   @api get direction() {
     return this._direction;
@@ -73,7 +82,7 @@ export default class ComboBox extends LightningElement {
   }
 
   syncListBoxFieldAttribute() {
-    const elm = this.template.querySelector('[role="button"]');
+    const elm = this.template.querySelector('.bx--list-box__field');
     synchronizeAttrs(elm, {
       'aria-expanded': this.ariaExpanded,
       'aria-owns': this.ariaExpanded && this._menuId,
@@ -126,6 +135,10 @@ export default class ComboBox extends LightningElement {
     );
   }
 
+  get validWarn() {
+    return !this.invalid && this.warn;
+  }
+
   handleKeyDown(e) {
     e.stopPropagation();
 
@@ -141,15 +154,16 @@ export default class ComboBox extends LightningElement {
     e.preventDefault();
     if (this.disabled) return;
     this.open = !this.open;
-    const elm = this.template.querySelector('[role="button"]');
+    const elm = this.template.querySelector('.bx--list-box__field');
     elm?.focus();
   }
 
   handleBlur(e) {}
 
   handleInput(e) {
+    console.log(e.target);
     if (!this.open && e.target.value.length > 0) {
-      this.open = true;
+      this.open = !this.open;
     }
 
     if (!this.value.length) {
@@ -162,57 +176,60 @@ export default class ComboBox extends LightningElement {
     e.stopPropagation();
     e.preventDefault();
 
-    const { _highlightedIndex, _selectedId, _filteredItems, value , change } = this;
-
     let key = e.keyCode;
     if (key === keyCodes.enter) {
-      this.open = !this.open;
-      if (
-        _highlightedIndex > -1 &&
-        _filteredItems[_highlightedIndex]?.Id !== _selectedId
-      ) {
-        this.open = false;
-        if (_filteredItems[_highlightedIndex]) {
-          this.value = _filteredItems[_highlightedIndex]?.text;
-          this._selectedId = _filteredItems[_highlightedIndex]?.id;
-          this._selectedItem = _filteredItems[_highlightedIndex];
-        }
-      } else {
-        // search typed value with lowercase
-        const matchedItem = _filteredItems.find((e) => {
-          return e.text.toLowerCase() === value?.toLowerCase() && !e.disabled;
-        });
-
-        if (matchedItem) {
-          this.open = false;
-          this._selectedItem = matchedItem;
-          this.value = _selectedItem.text;
-          this._selectedId = _selectedItem.id;
-        }
-      }
-
-      this._highlightedIndex = -1;
+      this.selectItem();
     } else if (key === keyCodes.tab || key === keyCodes.escape) {
       this.open = false;
     } else if (key === keyCodes.down) {
-      change.bind(this)(1);
+      this.change(1);
     } else if (key === keyCodes.up) {
-      change.bind(this)(-1);
+      this.change(-1);
     }
   }
 
   handleSelect(e) {
-    this.updateActive(e.detail);
+    this._highlightedIndex = e.detail;
+    this.selectItem();
   }
 
-  updateActive(index) {
-    this.items = this.items.map((it) => ({
-      ...it,
-      ...{ active: index == it.id, highlighted: index == it.id }
-    }));
-    this._selectedId = index;
-    this._selectedItem = this.items.find((it) => it.id == index);
-    console.log(index, this.items);
+  selectItem() {
+    const { _highlightedIndex, _selectedId, _filteredItems, value } = this;
+
+    this.open = false;
+    if (
+      _highlightedIndex > -1 &&
+      _filteredItems[_highlightedIndex]?.id !== _selectedId
+    ) {
+      this.open = false;
+      if (_filteredItems[_highlightedIndex]) {
+        this.value = _filteredItems[_highlightedIndex]?.text;
+        this._selectedId = _filteredItems[_highlightedIndex]?.id;
+        this._selectedItem = _filteredItems[_highlightedIndex];
+      }
+    } else {
+      // search typed value with lowercase
+      const matchedItem = _filteredItems.find((e) => {
+        return e.text.toLowerCase() === value?.toLowerCase() && !e.disabled;
+      });
+
+      if (matchedItem) {
+        this.open = false;
+        this._selectedItem = matchedItem;
+        this.value = matchedItem.text;
+        this._selectedId = matchedItem.id;
+      }
+    }
+
+    this._highlightedIndex = -1;
+
+    // this.items = this.items.map((it) => ({
+    //   ...it,
+    //   ...{ active: index == it.id, highlighted: index == it.id }
+    // }));
+    // this._selectedId = index;
+    // this._selectedItem = this.items.find((it) => it.id == index);
+    // this.value = this._selectedItem.text;
   }
 
   clear() {
@@ -235,7 +252,7 @@ export default class ComboBox extends LightningElement {
     } else if (index >= _items.length) {
       index = 0;
     }
-    
+
     // let disabled = this.items[index].disabled;
     // while(disabled) {
     //   index = index + dir;
@@ -249,7 +266,7 @@ export default class ComboBox extends LightningElement {
     // }
 
     this._highlightedIndex = index;
-    this.updateActive(index);
+    this.selectItem();
   }
 
   renderedCallback() {

@@ -154,8 +154,7 @@ export default class ComboBox extends LightningElement {
     e.preventDefault();
     if (this.disabled) return;
     this.open = !this.open;
-    const elm = this.template.querySelector('.bx--list-box__field');
-    elm?.focus();
+    this.template.querySelector('.bx--list-box__field')?.focus();
   }
 
   handleBlur(e) {}
@@ -182,9 +181,9 @@ export default class ComboBox extends LightningElement {
     } else if (key === keyCodes.tab || key === keyCodes.escape) {
       this.open = false;
     } else if (key === keyCodes.down) {
-      this.change(1);
+      this.move(1);
     } else if (key === keyCodes.up) {
-      this.change(-1);
+      this.move(-1);
     }
   }
 
@@ -193,9 +192,15 @@ export default class ComboBox extends LightningElement {
     this.selectItem();
   }
 
+  handleClear(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    this.clear();
+  }
+
+
   selectItem() {
     const { _highlightedIndex, _selectedId, _filteredItems, value } = this;
-
     this.open = false;
     if (
       _highlightedIndex > -1 &&
@@ -242,14 +247,15 @@ export default class ComboBox extends LightningElement {
     this.value = '';
   }
 
-  change(dir) {
+  move(dir) {
     let index = this._highlightedIndex + dir;
-    let _items = !this._filteredItems?.length
+    let items = !this._filteredItems?.length
       ? this.items
       : this._filteredItems;
+
     if (index < 0) {
-      index = _items.length - 1;
-    } else if (index >= _items.length) {
+      index = items.length - 1;
+    } else if (index >= items.length) {
       index = 0;
     }
 

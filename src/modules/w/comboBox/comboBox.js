@@ -198,20 +198,17 @@ export default class ComboBox extends LightningElement {
     this.clear();
   }
 
-
   selectItem() {
     const { _highlightedIndex, _selectedId, _filteredItems, value } = this;
     this.open = false;
+
     if (
       _highlightedIndex > -1 &&
       _filteredItems[_highlightedIndex]?.id !== _selectedId
     ) {
-      this.open = false;
-      if (_filteredItems[_highlightedIndex]) {
-        this.value = _filteredItems[_highlightedIndex]?.text;
-        this._selectedId = _filteredItems[_highlightedIndex]?.id;
-        this._selectedItem = _filteredItems[_highlightedIndex];
-      }
+      this.value = _filteredItems[_highlightedIndex]?.text;
+      this._selectedId = _filteredItems[_highlightedIndex]?.id;
+      this._selectedItem = _filteredItems[_highlightedIndex];
     } else {
       // search typed value with lowercase
       const matchedItem = _filteredItems.find((e) => {
@@ -219,7 +216,6 @@ export default class ComboBox extends LightningElement {
       });
 
       if (matchedItem) {
-        this.open = false;
         this._selectedItem = matchedItem;
         this.value = matchedItem.text;
         this._selectedId = matchedItem.id;
@@ -230,7 +226,7 @@ export default class ComboBox extends LightningElement {
 
     // this.items = this.items.map((it) => ({
     //   ...it,
-    //   ...{ active: index == it.id, highlighted: index == it.id }
+    //   ...{ active: _highlightedIndex == it.id }
     // }));
     // this._selectedId = index;
     // this._selectedItem = this.items.find((it) => it.id == index);
@@ -249,9 +245,7 @@ export default class ComboBox extends LightningElement {
 
   move(dir) {
     let index = this._highlightedIndex + dir;
-    let items = !this._filteredItems?.length
-      ? this.items
-      : this._filteredItems;
+    let items = !this._filteredItems?.length ? this.items : this._filteredItems;
 
     if (index < 0) {
       index = items.length - 1;

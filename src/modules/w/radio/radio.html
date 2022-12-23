@@ -1,0 +1,21 @@
+<template>
+   <div>
+      <input
+         type="radio"
+         id={id}
+         name={name}
+         checked={checked}
+         disabled={disabled}
+         required={required}
+         value={value}
+         class="bx--radio-button"
+         onchange={handleChange}
+      />
+      <label class="bx--radio-button__label" for={id}>
+         <span class="bx--radio-button__appearance"></span>
+         <span if:true={labelText} class={computedLabelClass}>
+            <slot name="labelText">{labelText}</slot>
+         </span>
+      </label>
+   </div>
+</template>

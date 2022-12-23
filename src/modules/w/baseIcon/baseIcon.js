@@ -26,7 +26,7 @@ export default class BaseIcon extends LightningElement {
       return templates[name];
     } else {
       console.warn(`Cannot find the base icon ${name}`);
-      return templates.null;
+      return templates.Void;
     }
   }
 

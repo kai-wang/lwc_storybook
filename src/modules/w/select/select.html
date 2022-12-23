@@ -24,16 +24,16 @@
                   </option>
                </template>
             </select>
-            <w-svg-icon
+            <w-base-icon
                class-name="bx--select__arrow"
-               src="/assets/custom/sprites-32.svg#chevron--down"
-            ></w-svg-icon>
+               name="ChevronDown"
+            ></w-base-icon>
             <template if:true={invalid}>
-               <w-svg-icon
+               <w-base-icon
                   class-name="bx--select__invalid-icon"
-                  src="/assets/custom/sprites-32.svg#warning--filled"
+                  src="WarningFilled"
                   fill=""
-               ></w-svg-icon>
+               ></w-base-icon>
             </template>
          </div>
          <template if:true={invalid}>
@@ -63,23 +63,23 @@
                </option>
             </template>
          </select>
-         <w-svg-icon
+         <w-base-icon
             class-name="bx--select__arrow"
-            src="/assets/custom/sprites-32.svg#chevron--down"
-         ></w-svg-icon>
+            name="ChevronDown"
+         ></w-base-icon>
          <template if:true={invalid}>
-            <w-svg-icon
+            <w-base-icon
                class="bx--select__invalid-icon"
-               src="/assets/custom/sprites-32.svg#warning--filled"
+               name="WarningFilled"
                fill=""
-            ></w-svg-icon>
+            ></w-base-icon>
          </template>
          <template if:true={isValidAndWarn}>
-            <w-svg-icon
+            <w-base-icon
                class="bx--select__invalid-icon bx--select__invalid-icon--warning"
-               src="/assets/custom/sprites-32.svg#warning--alt--filled"
+               name="WarningAltFilled"
                fill=""
-            ></w-svg-icon>
+            ></w-base-icon>
          </template>
       </div>
 

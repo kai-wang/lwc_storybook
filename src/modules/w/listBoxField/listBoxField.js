@@ -19,11 +19,11 @@ export default class ListBoxField extends LightningElement {
     const elm = this.template.querySelector('div');
 
     synchronizeAttrs(elm, {
-      'aria-expanded': this.ariaExpanded,
-      'aria-owns': this.ariaExpanded && this._menuId,
-      'aria-controls': this.ariaExpanded && this._menuId,
+      'aria-expanded': this.getAttribute('aria-expanded'),
+      'aria-owns': this.getAttribute('aria-owns') && this._menuId,
+      'aria-controls': this.getAttribute('aria-controls') && this._menuId,
       'aria-disabled': this.disabled,
-      'aria-label': this.ariaExpanded ? 'Close Menu' : 'Open Menu',
+      'aria-label': this.getAttribute('aria-label') ? 'Close Menu' : 'Open Menu',
       tabindex: this.disabled ? '-1' : this.tabIndex
     });
   }

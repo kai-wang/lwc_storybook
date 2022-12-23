@@ -22,27 +22,27 @@
             class={computedInnerWrapper}
          >
             <template if:true={invalid}>
-               <w-svg-icon
+               <w-base-icon
                   class-name="bx--text-input__invalid-icon"
-                  src="/assets/custom/sprites-32.svg#warning--filled"
+                  name="WarningFilled"
                   fill=""
-               ></w-svg-icon>
+               ></w-base-icon>
             </template>
 
             <template if:true={isValidAndWarn}>
-               <w-svg-icon
+               <w-base-icon
                   class-name="bx--text-input__invalid-icon bx--text-input__invalid-icon--warning"
-                  src="/assets/custom/sprites-32.svg#warning--alt--filled"
+                  name="WarningAltFilled"
                   fill=""
-               ></w-svg-icon>
+               ></w-base-icon>
             </template>
 
             <template if:true={readOnly}>
-               <w-svg-icon
+               <w-base-icon
                   class-name="bx--text-input__readonly-icon"
-                  src="/assets/custom/sprites-32.svg#edit--off"
+                  name="EditOff"
                   fill=""
-               ></w-svg-icon>
+               ></w-base-icon>
             </template>
 
             <input

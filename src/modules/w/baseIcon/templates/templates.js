@@ -12,3 +12,8 @@ export { default as Close } from './Close.html';
 export { default as Copy } from './Copy.html';
 export { default as ChevronRight } from './ChevronRight.html';
 export { default as ChevronDown } from './ChevronDown.html';
+export { default as View } from './View.html';
+export { default as ViewOff } from './ViewOff.html';
+export { default as Search } from './Search.html';
+export { default as EditOff } from './EditOff.html';
+export { default as Login } from './Login.html';

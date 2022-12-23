@@ -6,7 +6,7 @@ import * as templates from './templates/templates';
 export default class BaseIcon extends LightningElement {
   @api name;
   @api title;
-  @api size = 24;
+  @api size = 16;
   @api fill = 'currentColor';
   @api role = 'img';
   @api className;

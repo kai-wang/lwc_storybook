@@ -33,18 +33,18 @@
                onblur={handleBlur}
             />
             <template if:true={invalid}>
-               <w-svg-icon
+               <w-base-icon
                   class="bx--list-box__invalid-icon"
-                  src="/assets/custom/sprites-32.svg#warning--filled"
+                  name="WarningFilled"
                   fill=""
-               ></w-svg-icon>
+               ></w-base-icon>
             </template>
             <template if:true={validWarn}>
-               <w-svg-icon
+               <w-base-icon
                   class="bx--list-box__invalid-icon bx--list-box__invalid-icon--warning"
-                  src="/assets/custom/sprites-32.svg#warning--alt--filled"
+                  name="WarningAltFilled"
                   fill=""
-               ></w-svg-icon>
+               ></w-base-icon>
             </template>
             <div
                if:true={value}
@@ -52,17 +52,14 @@
                class="bx--list-box__selection"
                onclick={handleClear}
             >
-               <w-svg-icon
-                  src="/assets/custom/sprites-32.svg#close"
-                  fill=""
-               ></w-svg-icon>
+               <w-base-icon name="Close" fill=""></w-base-icon>
             </div>
             <div class={computedIconClass}>
-               <w-svg-icon
+               <w-base-icon
                   aria-label={description}
                   title={description}
-                  src="/assets/custom/sprites-32.svg#chevron--down"
-               ></w-svg-icon>
+                  name="ChevronDown"
+               ></w-base-icon>
             </div>
          </div>
 

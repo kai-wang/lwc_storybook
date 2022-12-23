@@ -10,3 +10,4 @@ export { default as InformationSquareFilled } from './InformationSquareFilled.ht
 export { default as ErrorFilled } from './ErrorFilled.html';
 export { default as Close } from './Close.html';
 export { default as Copy } from './Copy.html';
+export { default as ChevronRight } from './ChevronRight.html';

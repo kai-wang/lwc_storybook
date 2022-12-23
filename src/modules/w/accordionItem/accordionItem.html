@@ -8,11 +8,11 @@
          disabled={disabled}
          onclick={handleClick}
       >
-         <w-svg-icon
-            class="bx--accordion__arrow"
+         <w-base-icon
+            class-name="bx--accordion__arrow"
             aria-label={iconDescription}
-            src="/assets/custom/sprites-32.svg#chevron--right"
-         ></w-svg-icon>
+            name="ChevronRight"
+         ></w-base-icon>
 
          <div class="bx--accordion__title">
             <slot name="title">{title}</slot>

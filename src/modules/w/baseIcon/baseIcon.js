@@ -10,9 +10,14 @@ export default class BaseIcon extends LightningElement {
   @api fill = 'currentColor';
   @api role = 'img';
   @api className;
+  @api tabIndex;
 
   get computedClass() {
     return clsx(`${this.className}`);
+  }
+
+  get focusable() {
+    return this.tabIndex === 0 ? true : undefined;
   }
 
   render() {

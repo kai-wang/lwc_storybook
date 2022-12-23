@@ -9,3 +9,4 @@ export { default as CheckmarkFilled } from './CheckmarkFilled.html';
 export { default as InformationSquareFilled } from './InformationSquareFilled.html';
 export { default as ErrorFilled } from './ErrorFilled.html';
 export { default as Close } from './Close.html';
+export { default as Copy } from './Copy.html';

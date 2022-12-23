@@ -1,13 +1,13 @@
 <template>
    <div if:true={open} role={role} kind={kind} class={computedClass}>
       <div class="bx--inline-notification__details">
-         <w-svg-icon
-            class="bx--inline-notification__icon"
-            aria-label={iconDescription}
-            src={icon}
+         <w-base-icon
+            class-name="bx--inline-notification__icon"
+            name={icon}
             size={iconSize}
             fill=""
-         ></w-svg-icon>
+            aria-label={iconDescription}
+         ></w-base-icon>
          <div class="bx--inline-notification__text-wrapper">
             <p class="bx--inline-notification__title">
                <slot name="title">{title}</slot>
@@ -27,12 +27,12 @@
             class="bx--inline-notification__close-button"
             onclick={handleClose}
          >
-            <w-svg-icon
-               class="bx--inline-notification__close-icon"
-               aria-label={iconDescription}
-               src={closeIcon}
+            <w-base-icon
+               class-name="bx--inline-notification__close-icon"
+               name={closeIcon}
                size={iconSize}
-            ></w-svg-icon>
+               aria-label={iconDescription}
+            ></w-base-icon>
          </button>
       </template>
    </div>

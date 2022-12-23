@@ -30,9 +30,9 @@ export default class BaseIcon extends LightningElement {
     const svg = this.template.querySelector('svg');
     synchronizeAttrs(svg, {
       focusable: this.focusable,
-      'aria-label': this.getAttribute('ariaLabel'),
-      'aria-labelledby': this.getAttribute('ariaLabelledby'),
-      'aria-hidden': this.getAttribute('ariaHidden') || 'true'
+      'aria-label': this.getAttribute('aria-label'),
+      'aria-labelledby': this.getAttribute('aria-labelledby'),
+      'aria-hidden': this.getAttribute('aria-hidden') || 'true'
     });
   }
 }

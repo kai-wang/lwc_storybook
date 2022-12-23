@@ -13,14 +13,23 @@ const KIND = {
   ]
 };
 
+// const ICONS = {
+//   error: '/assets/custom/sprites-32.svg#error--filled',
+//   'info-square': '/assets/custom/sprites-32.svg#information--square--filled',
+//   info: '/assets/custom/sprites-32.svg#information--square--filled',
+//   success: '/assets/custom/sprites-32.svg#checkmark--filled',
+//   warning: '/assets/custom/sprites-32.svg#warning--filled',
+//   'warning-alt': '/assets/custom/sprites-32.svg#warning--alt--filled',
+//   close: '/assets/custom/sprites-32.svg#close'
+// };
 const ICONS = {
-  error: '/assets/custom/sprites-32.svg#error--filled',
-  'info-square': '/assets/custom/sprites-32.svg#information--square--filled',
-  info: '/assets/custom/sprites-32.svg#information--square--filled',
-  success: '/assets/custom/sprites-32.svg#checkmark--filled',
-  warning: '/assets/custom/sprites-32.svg#warning--filled',
-  'warning-alt': '/assets/custom/sprites-32.svg#warning--alt--filled',
-  close: '/assets/custom/sprites-32.svg#close'
+  error: 'ErrorFilled',
+  'info-square': 'InformationSquareFilled',
+  info: 'InformationSquareFilled',
+  success: 'CheckmarkFilled',
+  warning: 'WarningFilled',
+  'warning-alt': 'WarningAltFilled',
+  close: 'Close'
 };
 
 export default class Alert extends LightningElement {

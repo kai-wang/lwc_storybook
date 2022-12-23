@@ -11,3 +11,4 @@ export { default as ErrorFilled } from './ErrorFilled.html';
 export { default as Close } from './Close.html';
 export { default as Copy } from './Copy.html';
 export { default as ChevronRight } from './ChevronRight.html';
+export { default as ChevronDown } from './ChevronDown.html';

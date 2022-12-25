@@ -1,38 +1,53 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, createElement } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean, uid } from 'w/utilsPrivate';
+import LightningContextElement from 'lightning/context';
+import { normalizeString, keyCodes, uid } from 'w/utils';
 import { createCalendar } from './createCalendar';
+import { render } from './lwcUtils';
+import DatePickerInput from 'w/datePickerInput';
 
 const TYPE = {
-  fallbackValue: 'single',
-  validValues: ['simple', 'single', 'range', 'nolabel']
+  fallbackValue: 'range',
+  validValues: ['simple', 'single', 'range']
 };
 
-export default class DatePicker extends LightningElement {
-  _type = TYPE.fallbackValue;
+export default class DatePicker extends LightningContextElement {
+  id = uid('dp-');
+  calendar = null;
 
-  @api short = false;
-  @api light = false;
   @api value = '';
+  @api dateFormat = 'dd/mm/yyyy';
+
+  //Only for range date picker
   @api valueFrom = '';
   @api valueTo = '';
-  @api dateFormat = 'd/m/Y';
+
   @api maxDate = null;
   @api minDate = null;
   @api locale = 'en';
-  
-  id = uid('dp-');
+  @api short = false;
+  @api light = false;
 
-  _flatpickProps = { static: true };
-  _calendar = null;
-  _datePicker = null;
+  _didRendered = false;
+  _type = TYPE.fallbackValue;
+
+  inputs = [];
+
+  flatpickrProps = { static: true };
+
+  state = {
+    range: false,
+    inputValue: '',
+    inputValueFrom: '',
+    inputValueTo: ''
+  };
 
   @api get type() {
     return this._type;
   }
 
   set type(value) {
-    this._type = normalizeString(value, TYPE);
+    this._type = normalizeString(TYPE, TYPE.fallbackValue);
   }
 
   get computedClass() {
@@ -44,68 +59,217 @@ export default class DatePicker extends LightningElement {
     );
   }
 
-  handleKeydown(event) {
-    if(event.keyCode ==- '27') {
-      event.stopPropagation();
-    }
+  get datePickerRef() {
+    return this.template.querySelector(`[data-id="${this.id}"]`);
   }
-
 
   connectedCallback() {
-    console.log('init calendar');
-    this.initCalendar();
   }
 
- async initCalendar() {
-
-    let datePickerRef = this.template.querySelector(`[data-id="${this.id}"]`);
-
-    let { dateFormat, locale, minDate, maxDate, _type } = this;
-
-    let options = {
-      dateFormat, locale, maxDate, minDate, static: true
+  renderedCallback() {
+    if(!this._didRendered) {
+      this._didRendered = true;
+      this.initCalendar();
     }
+  }
 
-    let calendar = await createCalendar({
+  @api
+  async addComponent() {
+      const container = this.template.querySelector(`[data-id="${this.id}"]`);
+
+      const element = createElement('w-date-picker-input', { is: DatePickerInput });
+      element.calendar = this.state;
+
+      container.appendChild(element);
+  }
+
+  async initCalendar() {
+    let inputRef = this.template.querySelector(`[data-id="${this.id}"]`);
+
+    this.calendar = await createCalendar({
       options: {
-        ...options,
-        appendTo: datePickerRef,
-        defaultDate: '11/11/2022',
-        mode: _type
+        appendTo: inputRef,
+        mode: 'simple'
       },
-      base: { value: '09/09/2022' },
-      input: { value: '10/10/2022' },
+      base: inputRef,
+      input: inputRef,
       dispatch: (event) => {
-        const detail = { selectedDates: calendar.selectedDates };
-      },
+        if (event === 'change') {
+          const { selectedDates, dateStr, instance } = this.calendar;
+          console.log(selectedDates, dateStr, instance);
+        }
+      }
     });
 
-    console.log(calendar);
+    await this.addComponent();
+    await this.addComponent();
   }
 
+  //   // let inputRef = { value: '' };
+  //   // let inputRefTo = { value: '' };
+  //   // let options= [];
 
-  //   let datePicker = this.template.querySelector(`[data-id="${this.id}"]`);
+  //   // let calendar = await createCalendar({
+  //   //   options: {
+  //   //     ...options,
+  //   //     appendTo: this.datePickerRef,
+  //   //     defaultDate: '',
+  //   //     mode: 'single',
+  //   //   },
+  //   //   base: inputRef,
+  //   //   input: inputRefTo,
+  //   //   dispatch: (event) => {
+  //   //     const detail = { selectedDates: calendar.selectedDates };
 
-  //   let {_calendar, minDate, maxDate, locale, dateFormat, _flatpickrProps} = this;
+  //   //     detail.dateStr = inputRef.value;
+
+  //   //     return;
+  //   //   }});
+
+  //   //   console.log(calendar);
+  // }
+
+  // _type = TYPE.fallbackValue;
+
+  // @api short = false;
+  // @api light = false;
+  // @api value = '';
+  // @api valueFrom = '';
+  // @api valueTo = '';
+  // @api dateFormat = 'd/m/Y';
+  // @api maxDate = null;
+  // @api minDate = null;
+  // @api locale = 'en';
+
+  // id = uid('dp-');
+
+  // _flatpickProps = { static: true };
+  // _calendar = null;
+  // _datePicker = null;
+
+  // @api get type() {
+  //   return this._type;
+  // }
+
+  // set type(value) {
+  //   this._type = normalizeString(value, TYPE);
+  // }
+
+  // get computedClass() {
+  //   return clsx(
+  //     'bx--date-picker',
+  //     this.short && 'bx--date-picker--short',
+  //     this.light && 'bx--date-picker--light',
+  //     `bx--date-picker--${this._type}`
+  //   );
+  // }
+
+  // handleKeydown(event) {
+  //   if (event.keyCode == '27') {
+  //     event.stopPropagation();
+  //   }
+  // }
+
+  // setContext() {
+  //   this._context['DatePicker'] = {
+  //     range,
+  //     inputValue,
+  //     inputValueFrom,
+  //     inputValueTo,
+  //     inputIds,
+  //     hasCalendar,
+  //     add: (data) => {
+  //       this.inputs.update((_) => [..._, data]);
+  //     },
+  //     declareRef: ({ id, ref }) => {
+  //       if()
+  //     }
+  //   }
+  // }
+
+  // connectedCallback() {
+  //   let self = this;
+  //   self.setContext('DatePicker', {
+  //     range,
+  //     inputValue,
+  //     inputValueFrom,
+  //     inputValueTo,
+  //     inputIds,
+  //     hasCalendar,
+  //     add: (data) => {
+  //       self.inputs.update((_) => [..._, data]);
+  //     },
+  //     updateValue: ({ type, value }) => {
+  //       if ((!self._calendar && type === 'input') || type === 'change') {
+  //         inputValue.set(value);
+  //       }
+
+  //       if (!self._calendar && type === 'change') {
+  //         dispatchEvent(new CustomEvent('change'));
+  //       }
+  //     },
+  //     openCalendar: () => {
+  //       self._calendar.open();
+  //     }
+  //   });
+  //   console.log('init calendar');
+  //   this.initCalendar();
+  // }
+
+  // async initCalendar(options) {
+  //   let { _calendar, minDate, maxDate, locale, dateFormat, flatpickrProps } = this;
 
   //   if(_calendar) {
-  //     _calendar.set("minDate", minDate);
-  //     _calendar.set("maxDate", maxDate);
-  //     _calendar.set("locale", locale);
-  //     _calendar.set("dateFormat", dateFormat);
-  //     Object.entries(_flatpickrProps).forEach(([option, value]) => {
-  //       _calendar.set(options, value);
+  //     _calendar.set('minDate', minDate);
+  //     _calendar.set('maxDate', maxDate);
+  //     _calendar.set('locale', locale);
+  //     _calendar.set('dataFormat', dateFormat);
+
+  //     Object.entries(flatpickrProps).forEach(([option, value]) => {
+  //       _calendar.set(option, value);
   //     });
   //     return;
   //   }
 
-  //   _calendar = await createCalendar({
+  //   calendar = await createCalendar({
   //     options: {
   //       ...options,
-  //       appendTo: datePicker,
-  //       defaultDate: this.value,
-  //       mode: this.type
+  //       appendTo: datePickerRef,
+  //       defaultDate: inputValue,
+  //       mode: mode
   //     },
-  //     base: 
+  //     base: inputRef,
+  //     input: inputRefTo,
+  //     dispatch: (event) => {
+  //       const detail = { selectedDates: _calendar.selectedDates };
+  //       if(range) {
+  //         const from = inputRef.value;
+  //         const to = inputTefTo.value;
+  //         detail.dateStr = {
+  //           from: inputRef.value,
+  //           to: inputRefTo.value,
+  //         };
+
+  //         valueFrom = from;
+  //         valueTo = to;
+  //       } else {
+  //         detail.dateStr = inputRef.value;
+  //       }
+
+  //       return dispatch(event, detail);
+  //     }
   //   })
+  // }
+
+  // get inputValue() {
+  //   return this._inputValue;
+  // }
+
+  // get mode() {
+  //   return this._mode;
+  // }
+
+  // get datePickerRef() {
+  //   return this.template.querySelector('[data-id="${this.id}"]');
+  // }
 }

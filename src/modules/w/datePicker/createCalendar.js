@@ -47,7 +47,7 @@ function updateMonthNode(instance) {
   }
 }
 
-async function createCalendar({ options, base, input, dispatch }) {
+export async function createCalendar({ options, base, input, dispatch }) {
   let locale = options.locale;
 
   if (options.locale === 'en' && l10n && l10n.en) {
@@ -96,5 +96,3 @@ async function createCalendar({ options, base, input, dispatch }) {
     ...options
   });
 }
-
-export { createCalendar };

@@ -1,8 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { clsx } from 'w/utils';
-import { normalizeString, normalizeBoolean, uid } from 'w/utilsPrivate';
-import rangePlugin from '../datePicker/rangePicker';
-import { createCalendar } from './createCalendar';
+import { normalizeString, synchronizeAttrs, uid } from 'w/utils';
 
 const SIZE = {
   fallbackValue: 'sm',
@@ -10,7 +8,6 @@ const SIZE = {
 };
 
 export default class DatePickerInput extends LightningElement {
-  @wire(ContextProvider.Provider) _context;
 
   @api type = 'text';
   @api placeholder = '';
@@ -25,16 +22,13 @@ export default class DatePickerInput extends LightningElement {
   @api warnText = '';
   @api warn = false;
   @api name;
+  @api group;
+
+  @api calendar;
 
   _id = uid('dpi-');
   _pattern = '\\d{1,2}\\/\\d{1,2}\\/\\d{4}';
   _size = SIZE.fallbackValue;
-
-  _inputIds;
-
-  get context() {
-    return this._context;
-  }
 
   @api get size() {
     return this._size;
@@ -76,17 +70,13 @@ export default class DatePickerInput extends LightningElement {
   }
 
   get computedValue() {
-    { range, inputIds, inputValueFrom, inputValueTo, inputValue } = this.context;
-
-    return range
-      ? inputIds.indexOf(this._id) === 0
-        ? inputValueFrom
-        : inputValueTo
-      : inputValue;
+    if(!this.calendar) return;
+    const { range, inputValue, inputValueFrom, inputValueTo } = this.calendar;
+    return !range ? inputValue : this.group === 'from' ? inputValueFrom : inputValueTo;
   }
 
   get hasCalendar() {
-    return this.context.hasCalendar;
+    return this.calendar;
   }
 
   get computedHelperClass() {
@@ -98,10 +88,12 @@ export default class DatePickerInput extends LightningElement {
 
   handleInput(event) {
     console.log(event.target.value);
+    this.dispatch(event.target.value);
   }
 
   handleChange(event) {
     console.log(event.target.value);
+    this.dispatch(event.target.value);
   }
 
   handleKeydown(event) {
@@ -112,11 +104,32 @@ export default class DatePickerInput extends LightningElement {
     console.log(event.target.value);
   }
 
+
+  dispatch(value) {
+    this.dispatchEvent(new CustomEvent('change', {
+      detail: {
+        type: this.group,
+        value: value
+      }
+    }));
+  }
+
   openCalendar() {
-    this.context.openCalendar();
+
+    const { openCalendar } = this.calendar;
+
+    openCalendar();
+
   }
 
   validandwarn() {
     return !this.invalid && this.warn;
+  }
+
+  renderedCallback() {
+    const input = this.template.querySelector('input');
+    synchronizeAttrs(input, {
+      'data-invalid': this.invalid
+    });
   }
 }

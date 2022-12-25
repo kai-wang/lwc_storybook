@@ -17,3 +17,4 @@ export { default as ViewOff } from './ViewOff.html';
 export { default as Search } from './Search.html';
 export { default as EditOff } from './EditOff.html';
 export { default as Login } from './Login.html';
+export { default as Calendar } from './Calendar.html';

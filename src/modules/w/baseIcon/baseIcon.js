@@ -31,13 +31,18 @@ export default class BaseIcon extends LightningElement {
   }
 
   renderedCallback() {
-    console.log('called ');
     const svg = this.template.querySelector('svg');
+
+    svg.addEventListener('onClick', this.handleClick);
     synchronizeAttrs(svg, {
       focusable: this.focusable,
       'aria-label': this.getAttribute('aria-label'),
       'aria-labelledby': this.getAttribute('aria-labelledby'),
       'aria-hidden': this.getAttribute('aria-hidden') || 'true'
     });
+  }
+
+  handleClick(event) {
+    this.dispatchEvent(new CustomEvent('click'));
   }
 }

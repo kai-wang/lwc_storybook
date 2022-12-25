@@ -8,7 +8,6 @@ const SIZE = {
 };
 
 export default class DatePickerInput extends LightningElement {
-
   @api type = 'text';
   @api placeholder = '';
   @api disabled = false;
@@ -22,7 +21,8 @@ export default class DatePickerInput extends LightningElement {
   @api warnText = '';
   @api warn = false;
   @api name;
-  @api group;
+  @api mode;
+  @api value;
 
   @api calendar;
 
@@ -70,9 +70,8 @@ export default class DatePickerInput extends LightningElement {
   }
 
   get computedValue() {
-    if(!this.calendar) return;
-    const { range, inputValue, inputValueFrom, inputValueTo } = this.calendar;
-    return !range ? inputValue : this.group === 'from' ? inputValueFrom : inputValueTo;
+    if (!this.calendar) return;
+    return this.value;
   }
 
   get hasCalendar() {
@@ -104,22 +103,20 @@ export default class DatePickerInput extends LightningElement {
     console.log(event.target.value);
   }
 
-
   dispatch(value) {
-    this.dispatchEvent(new CustomEvent('change', {
-      detail: {
-        type: this.group,
-        value: value
-      }
-    }));
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: {
+          type: this.mode,
+          value: value
+        }
+      })
+    );
   }
 
   openCalendar() {
-
     const { openCalendar } = this.calendar;
-
     openCalendar();
-
   }
 
   validandwarn() {

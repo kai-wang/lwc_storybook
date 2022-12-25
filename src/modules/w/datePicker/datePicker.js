@@ -3,7 +3,6 @@ import { clsx } from 'w/utils';
 import LightningContextElement from 'lightning/context';
 import { normalizeString, keyCodes, uid } from 'w/utils';
 import { createCalendar } from './createCalendar';
-import { render } from './lwcUtils';
 import DatePickerInput from 'w/datePickerInput';
 
 const TYPE = {
@@ -63,9 +62,6 @@ export default class DatePicker extends LightningContextElement {
     return this.template.querySelector(`[data-id="${this.id}"]`);
   }
 
-  connectedCallback() {
-  }
-
   renderedCallback() {
     if(!this._didRendered) {
       this._didRendered = true;
@@ -73,14 +69,13 @@ export default class DatePicker extends LightningContextElement {
     }
   }
 
-  @api
-  async addComponent() {
+  createInputElement({ mode }) {
       const container = this.template.querySelector(`[data-id="${this.id}"]`);
-
       const element = createElement('w-date-picker-input', { is: DatePickerInput });
       element.calendar = this.state;
-
+      element.mode = mode;
       container.appendChild(element);
+      this.inputs.push(element);
   }
 
   async initCalendar() {
@@ -89,20 +84,31 @@ export default class DatePicker extends LightningContextElement {
     this.calendar = await createCalendar({
       options: {
         appendTo: inputRef,
-        mode: 'simple'
+        mode: this._type,
+        locale: this.locale
       },
       base: inputRef,
       input: inputRef,
       dispatch: (event) => {
         if (event === 'change') {
           const { selectedDates, dateStr, instance } = this.calendar;
-          console.log(selectedDates, dateStr, instance);
+          for (let [index, val] of selectedDates.entries()) {
+            this.inputs[index].value = val;
+          }
         }
       }
     });
 
-    await this.addComponent();
-    await this.addComponent();
+    if(this._type === 'range') {
+      this.createInputElement({ 
+        mode: 'from'
+      });
+      this.createInputElement({
+        mode: 'to'
+      });
+    } else {
+      this.createInputElement({});
+    }
   }
 
   //   // let inputRef = { value: '' };

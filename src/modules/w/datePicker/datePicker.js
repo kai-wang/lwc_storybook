@@ -1,16 +1,15 @@
 import { LightningElement, api, createElement } from 'lwc';
 import { clsx } from 'w/utils';
-import LightningContextElement from 'lightning/context';
 import { normalizeString, keyCodes, uid } from 'w/utils';
 import { createCalendar } from './createCalendar';
 import DatePickerInput from 'w/datePickerInput';
 
 const TYPE = {
-  fallbackValue: 'single',
+  fallbackValue: 'range',
   validValues: ['simple', 'single', 'range']
 };
 
-export default class DatePicker extends LightningContextElement {
+export default class DatePicker extends LightningElement {
   id = uid('dp-');
   calendar = null;
 
@@ -39,10 +38,10 @@ export default class DatePicker extends LightningContextElement {
 
   get state() {
     return {
-      range: this.type === 'range',
-      inputValue: this.value,
-      inputValueFrom: this.valueFrom,
-      inputValueTo: this.valueTo,
+      range: () => { return this.type === 'range' },
+      inputValue: () => { return this.value },
+      inputValueFrom: () => { return this.valueFrom },
+      inputValueTo: () => { return this.valueTo },
       openCalendar: () => {
         this.calendar.open();
       },
@@ -139,16 +138,17 @@ export default class DatePicker extends LightningContextElement {
         minDate: this.minDate,
         maxDate: this.maxDate
       },
-      base: this.inputRef,
-      input: this.inputRefTo,
+      base: ref,
+      input: ref,
       dispatch: (event) => {
         if (event === 'change') {
           const { selectedDates, dateStr, instance } = this.calendar;
-          console.log(selectedDates);
-          // for (let [index, val] of selectedDates.entries()) {
-          //   this.inputs[index].value = val;
-          //   console.log(val);
-          // }
+          if(this._type === 'range') {
+            this.valueFrom = this.calendar.formatDate(selectedDates[0], this.dateFormat);
+            this.valueTo = this.calendar.formatDate(selectedDates[1], this.dateFormat);
+          } else {
+            this.value = this.calendar.formatDate(selectedDates[0], this.dateFormat);
+          }
         }
       }
     });

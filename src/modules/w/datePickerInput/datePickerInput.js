@@ -70,8 +70,8 @@ export default class DatePickerInput extends LightningElement {
   }
 
   get computedValue() {
-    if (!this.calendar) return;
-    return this.value;
+    const p = this.calendar;
+    return p?.range() ? ( this.mode === 'from' ? p?.inputValueFrom() : p?.inputValueTo() ) : p.inputValue() ;
   }
 
   get hasCalendar() {
@@ -104,6 +104,7 @@ export default class DatePickerInput extends LightningElement {
   }
 
   dispatch(value) {
+
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: {

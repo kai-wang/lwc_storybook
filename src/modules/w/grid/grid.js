@@ -1,5 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { clsx, normalizeString, normalizeBoolean } from 'w/utils';
+import { clsx } from 'w/utils';
 
 const breakpoints = ['sm', 'md', 'lg', 'xlg', 'max'];
 

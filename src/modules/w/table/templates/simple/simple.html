@@ -12,7 +12,12 @@
                      sort-direction={header.sortDirection}
                      active={header.active}
                   >
-                     <button type="button" class="bx--table-sort">
+                     <button
+                        type="button"
+                        data-id={header.key}
+                        class="bx--table-sort bx--table-sort--active bx--table-sort--ascending"
+                        onclick={handleColumnSort}
+                     >
                         <div class="bx--table-header-label">{header.value}</div>
                         <w-base-icon
                            name="ArrowUp"
@@ -33,7 +38,18 @@
                   </th>
                </template>
             </template>
+            <!--Table Header-->
          </tr>
       </thead>
+      <tbody>
+         <template for:each={rows} for:item="row">
+            <tr key={row.id}>
+               <td>{row.name}</td>
+               <td>{row.protocol}</td>
+               <td>{row.port}</td>
+               <td>{row.cost}</td>
+            </tr>
+         </template>
+      </tbody>
    </table>
 </template>

@@ -1,0 +1,39 @@
+<template>
+   <table class={computedClass}>
+      <thead>
+         <tr>
+            <!--Table Header-->
+            <template for:each={headers} for:item="header">
+               <template if:true={sortable}>
+                  <th
+                     key={header.key}
+                     data-header={header.key}
+                     sortable={header.sortable}
+                     sort-direction={header.sortDirection}
+                     active={header.active}
+                  >
+                     <button type="button" class="bx--table-sort">
+                        <div class="bx--table-header-label">{header.value}</div>
+                        <w-base-icon
+                           name="ArrowUp"
+                           size="20"
+                           class="bx--table-sort__icon"
+                        ></w-base-icon>
+                        <w-base-icon
+                           name="ArrowVertical"
+                           size="20"
+                           class="bx--table-sort__icon-unsorted"
+                        ></w-base-icon>
+                     </button>
+                  </th>
+               </template>
+               <template if:false={sortable}>
+                  <th scope={scope} data-header={header.key} key={header.key}>
+                     <div class="bx--table-header-label">{header.value}</div>
+                  </th>
+               </template>
+            </template>
+         </tr>
+      </thead>
+   </table>
+</template>

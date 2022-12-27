@@ -32,6 +32,7 @@ export default class BaseIcon extends LightningElement {
 
   renderedCallback() {
     const svg = this.template.querySelector('svg');
+    if(!svg) return;
 
     svg.addEventListener('onClick', this.handleClick);
     synchronizeAttrs(svg, {

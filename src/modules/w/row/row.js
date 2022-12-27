@@ -18,7 +18,6 @@ export default class Grid extends LightningElement {
     const {
       condensed,
       narrow,
-      fullWidth,
       noGutter,
       noGutterLeft,
       noGutterRight,
@@ -26,10 +25,9 @@ export default class Grid extends LightningElement {
     } = this;
 
     return clsx(
-      'bx--grid',
-      condensed && 'bx--grid--condensed',
-      narrow && 'bx--grid--narrow',
-      fullWidth && 'bx--grid--full-width',
+      'bx--row',
+      condensed && 'bx--row--condensed',
+      narrow && 'bx--row--narrow',
       noGutter && 'bx--no-gutter',
       noGutterLeft && 'bx--no-gutter--left',
       noGutterRight && 'bx--no-gutter--right',

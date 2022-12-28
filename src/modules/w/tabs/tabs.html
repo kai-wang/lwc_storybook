@@ -6,11 +6,7 @@
          class="bx--tabs-trigger"
          aria-label="listbox"
       >
-         <a
-            tabindex="-1"
-            class="bx--tabs-trigger-text"
-            href={triggerHref}
-         >
+         <a tabindex="-1" class="bx--tabs-trigger-text" href={triggerHref}>
             <template if:true={currentTab}>{currentTab.label}</template>
          </a>
       </div>

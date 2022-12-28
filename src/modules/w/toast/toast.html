@@ -1,12 +1,12 @@
 <template>
    <div if:true={open} role={role} kind={kind} class={computedClass}>
-      <w-svg-icon
+      <w-base-icon
          class="bx--toast-notification__icon"
          aria-label={iconDescription}
-         src={icon}
+         name={icon}
          size={iconSize}
          fill=""
-      ></w-svg-icon>
+      ></w-base-icon>
 
       <div class="bx--toast-notification__details">
          <h3 class="bx--toast-notification__title">
@@ -28,12 +28,12 @@
             class="bx--toast-notification__close-button"
             onclick={handleClose}
          >
-            <w-svg-icon
+            <w-base-icon
                class="bx--toast-notification__close-icon"
                aria-label={iconDescription}
-               src={closeIcon}
+               name={closeIcon}
                size={iconSize}
-            ></w-svg-icon>
+            ></w-base-icon>
          </button>
       </template>
    </div>

@@ -1,0 +1,11 @@
+<template>
+  <ul class="bx--switcher__item">
+    <template for:each={items} for:item="it">
+      <li class="bx--switcher__item" key={it.label}>
+        <a href={it.href} class="bx--switcher__item-link">
+          {it.label}
+        </a>
+      </li>
+    </template>
+  </ul>
+</template>

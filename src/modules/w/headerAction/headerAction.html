@@ -1,0 +1,20 @@
+<template>
+   <button type="button" class={computedClass} onclick={handleClick}>
+      <w-base-icon
+         if:true={isOpen}
+         name={icon}
+         size={size}
+         fill={fill}
+      ></w-base-icon>
+      <w-base-icon
+         if:false={isOpen}
+         name={closeIcon}
+         size={size}
+         fill={fill}
+      ></w-base-icon>
+      <span>{label}</span>
+   </button>
+   <div if:true={isOpen} class={openClass}>
+      <slot></slot>
+   </div>
+</template>

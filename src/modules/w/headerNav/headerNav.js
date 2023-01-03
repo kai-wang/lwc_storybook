@@ -16,9 +16,7 @@ export default class HeaderNav extends LightningElement {
     },
     {
       label: 'menu',
-      get menu() {
-        return true;
-      },
+      menu: true,
       expanded: false,
       items: [
         {
@@ -45,9 +43,7 @@ export default class HeaderNav extends LightningElement {
     },
     {
       label: 'menu 2',
-      get menu() {
-        return true;
-      },
+      menu: true ,
       expanded: false,
       items: [
         {
@@ -60,36 +56,41 @@ export default class HeaderNav extends LightningElement {
         },
         {
           label: 'link 3',
-          href: '#'
+          href: 'https://www.google.com'
         }
       ]
     }
   ];
 
   connectedCallback() {
-    window.addEventListener('click', this.closeMenu.bind(this));
+    this._ref = this.closeMenu.bind(this);
   }
 
   toggleMenuClick(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    let t = event.currentTarget;
-    let toggle = t.getAttribute('aria-expanded');
+    // let t = event.currentTarget;
+    // let toggle = t.getAttribute('aria-expanded');
 
-    t.setAttribute('aria-expanded', toggle === 'true' ? 'false' : 'true');
-
-    const elements = this.template.querySelectorAll('[aria-expanded="true"]');
+    const elements = this.template.querySelectorAll('[data-name="sub-menu"]');
     elements.forEach((e) => {
-      if (e != t && e.getAttribute('aria-expanded')) {
-        e.setAttribute('aria-expanded', 'false');
-      }
+      if (e == event.currentTarget) window.addEventListener('click', this._ref);
+
+      e.setAttribute(
+        'aria-expanded',
+        e != event.currentTarget
+          ? 'false'
+          : e.getAttribute('aria-expanded') === 'true'
+          ? 'false'
+          : 'true'
+      );
     });
   }
 
   closeMenu(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    console.log('close menu');
+    window.removeEventListener('click', this._ref);
 
     const elements = this.template.querySelectorAll('[aria-expanded="true"]');
     elements.forEach((e) => {

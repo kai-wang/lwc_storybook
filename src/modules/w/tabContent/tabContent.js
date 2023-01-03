@@ -11,8 +11,6 @@ export default class TabContent extends LightningElement {
   @api disabled;
   @api selected;
 
-  _hidden = false;
-
   get hidden() {
     return !(this.context?.currentActiveTab === this.id);
   }

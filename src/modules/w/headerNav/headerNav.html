@@ -1,0 +1,52 @@
+<template>
+   <nav class="bx--header__nav">
+      <ul role="menubar" class="bx--header__menu-bar">
+         <template for:each={items} for:item="it">
+            <li if:false={it.menu} rol="none" key={it.label}>
+               <a
+                  role="menuitem"
+                  tabindex="0"
+                  href={it.href}
+                  class="bx--header__menu-item"
+               >
+                  <span class="bx--text-truncate--end">{it.label}</span>
+               </a>
+            </li>
+
+            <li if:true={it.menu} role="none" class="bx--header__submenu" key={it.label}>
+               <a
+                  role="menuitem"
+                  aria-haspopup="menu"
+                  aria-label={it.label}
+                  aria-expanded="false"
+                  class="bx--header__menu-item bx--header__menu-title"
+                  onclick={toggleMenuClick}
+                  onkeydown={toggleMenuClick}
+               >
+                  {it.label}
+                  <w-base-icon
+                     name="ChevronDown"
+                     class="bx--header__menu-arrow"
+                  ></w-base-icon>
+               </a>
+               <ul role="menu" class="bx--header__menu">
+                  <template for:each={it.items} for:item="child">
+                     <li rol="none" key={child.label}>
+                        <a
+                           role="menuitem"
+                           tabindex="0"
+                           href={child.href}
+                           class="bx--header__menu-item"
+                        >
+                           <span class="bx--text-truncate--end"
+                              >{child.label}</span
+                           >
+                        </a>
+                     </li>
+                  </template>
+               </ul>
+            </li>
+         </template>
+      </ul>
+   </nav>
+</template>

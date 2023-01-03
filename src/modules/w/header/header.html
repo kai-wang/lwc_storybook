@@ -1,0 +1,16 @@
+<template>
+  <header class="bx--header">
+    <a
+      href={href}
+      class="bx--header__name"
+    >
+    <span if:true={hasCompany} class="bx--header__name--prefix">
+      {company}&nbsp;
+    </span>
+    <slot name="platform">
+      {platform}
+    </slot>
+    </a>
+    <slot></slot>
+  </header>
+</template>

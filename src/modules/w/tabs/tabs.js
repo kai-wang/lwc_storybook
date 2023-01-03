@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 import LightningContextElement from 'lightning/context';
 import { clsx, normalizeString, normalizeBoolean, uid } from 'w/utils';
 
@@ -11,7 +11,8 @@ export default class Tabs extends LightningContextElement {
   _tabState = [];
   _type = TYPE.fallbackValue;
   _dropdownHidden = true;
-  _activeTab = 0;
+  _activeTab;
+  _tabs = [];
 
   // @api activeTab = 0;
   @api autoWidth = false;
@@ -67,59 +68,52 @@ export default class Tabs extends LightningContextElement {
   }
 
   set tabs(data) {
-    if (Array.isArray(data)) {
-      const selectedTabIndex = data.findIndex((tab) =>
-        normalizeBoolean(tab.selected)
-      );
-      this.activeTab = selectedTabIndex === -1 ? 0 : selectedTabIndex;
+    if(!Array.isArray(data)) return [];
 
-      let { autoWidth, _activeTab } = this;
-
-      this._tabState = data.map((tab, idx) => ({
-        label: tab.label,
-        href: normalizeBoolean(tab.href) ? tab.href : '#',
-        id: normalizeBoolean(tab.Id) ? tab.Id : uid('tab-'), // keep the old id if existing
-        selected: tab.selected,
-        disabled: tab.disabled,
-        style: normalizeBoolean(autoWidth) ? 'width: auto' : '',
-        index: idx,
-        computedClass: clsx(
-          'bx--tabs__nav-item',
-          normalizeBoolean(tab.disabled) && 'bx--tabs__nav-item--disabled',
-          idx === _activeTab && 'bx--tabs__nav-item--selected'
-        )
-      }));
-    }
-    return [];
+    this._tabState = data;
   }
 
-  updateTabState(idx) {
-    this._tabState.forEach((tab) => {
-      tab.selected = tab.index === idx;
-    });
-
-    this.tabs = this._tabState;
+  updateTabState() {
+    
+    this.tabs = this._tabs.map((tab) => ({
+      label: tab.label,
+      href: tab.href || '#',
+      id: tab.id,
+      selected: this.activeTab === tab.id,
+      disabled: tab.disabled,
+      style: this.autoWidth ? 'width: auto' : '',
+      computedClass: clsx(
+        'bx--tabs__nav-item',
+        tab.disabled && 'bx--tabs__nav-item--disabled',
+        this.activeTab === tab.id && 'bx--tabs__nav-item--selected'
+      )
+    }));
   }
 
-  updateContentState() {
+  initializeTabs() {
     const items = this.querySelectorAll(`*[slot='content']`);
-    items.forEach((it, idx) => {
-      it.index = idx;
+    if(!items || items.length === 0) return;
+
+    items.forEach((it) => {
+      this._tabs.push(it);
+      if(it.selected)
+        this.activeTab = it.id;
     });
+
+    this.activeTab = this.activeTab || items[0].id;
+    this.updateTabState();
   }
 
   handleTabClick(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    const idx = parseInt(event.target.getAttribute('data-id'));
-    if (!Number.isNaN(idx) && this._tabState.length > idx) {
-      this.updateTabState(idx);
-    }
+    this.activeTab = event.currentTarget.dataset.id;
+    this.updateTabState();
   }
 
-  handleSlotChange(event) {
+  handleSlotChange() {
     // initialize slot element attributes;
-    this.updateContentState();
+    this.initializeTabs();
   }
 }

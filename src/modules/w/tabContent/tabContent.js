@@ -5,13 +5,15 @@ import ContextProvider from 'w/tabs';
 export default class TabContent extends LightningElement {
   @wire(ContextProvider.Provider) context;
 
-  @api index;
-  @api tabId;
   @api id = uid('tabc-');
+  @api label;
+  @api href;
+  @api disabled;
+  @api selected;
 
   _hidden = false;
 
   get hidden() {
-    return !(parseInt(this.context?.currentActiveTab) === parseInt(this.index));
+    return !(this.context?.currentActiveTab === this.id);
   }
 }

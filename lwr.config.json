@@ -25,16 +25,16 @@
     {
       "id": "home",
       "path": "/",
-      "rootComponent": "example/tailwind",
+      "rootComponent": "example/app",
       "layoutTemplate": "$layoutsDir/main.html",
       "bootstrap": {
         "syntheticShadow": true
       }
     },
     {
-      "id": "pricing",
-      "path": "/pricing",
-      "rootComponent": "example/pricing",
+      "id": "accordion",
+      "path": "/accordion",
+      "rootComponent": "example/accordion",
       "layoutTemplate": "$layoutsDir/main.html",
       "bootstrap": {
         "syntheticShadow": true

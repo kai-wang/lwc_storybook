@@ -1,0 +1,21 @@
+<template>
+   <w-layout company="Kai Wang" platform="Salesforce" side open>
+      <w-header-nav slot="header"> </w-header-nav>
+      <w-header-utilities slot="header">
+         <w-header-global-action
+            icon="Calendar"
+            active
+         ></w-header-global-action>
+         <w-header-global-action icon="Calendar"></w-header-global-action>
+
+         <w-header-action icon="Close" close-icon="Calendar">
+            <w-header-panel-links></w-header-panel-links>
+         </w-header-action>
+      </w-header-utilities>
+      <w-side-nav slot="side"></w-side-nav>
+
+      <div slot="content">
+         <slot></slot>
+      </div>
+   </w-layout>
+</template>

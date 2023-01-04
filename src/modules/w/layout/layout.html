@@ -1,21 +1,27 @@
 <template>
-    <header class="bx--header">
-      <a
-        href={href}
-        class="bx--header__name"
-      >
-      <span if:true={hasCompany} class="bx--header__name--prefix">
-        {company}&nbsp;
-      </span>
-      <slot name="platform">
-        {platform}
-      </slot>
+   <header class="bx--header">
+      <a href={href} class="bx--header__name">
+         <span if:true={hasCompany} class="bx--header__name--prefix">
+            {company}&nbsp;
+         </span>
+         <slot name="platform"> {platform} </slot>
       </a>
       <slot name="header"></slot>
-    </header>
+   </header>
 
-    <main class="bx--content">
+   <template if:true={side}>
+      <div
+         if:true={fixedSideNav}
+         class={computedSideNavClass}
+         style={computedSideNavStyle}
+      ></div>
+
+      <nav class={computedSideNavClass}>
+         <slot name="side"></slot>
+      </nav>
+   </template>
+
+   <main class="bx--content">
       <slot name="content"></slot>
-    </main>
-  
+   </main>
 </template>

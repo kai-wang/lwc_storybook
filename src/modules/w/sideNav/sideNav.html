@@ -1,0 +1,19 @@
+<template>
+   <ul class="bx--side-nav__items">
+      <template for:each={items} for:item="it">
+         <li key={it.label} class="bx--side-nav__item">
+            <a href={it.href} class="bx--side-nav__link">
+               <div
+                  if:true={it.icon}
+                  class="bx--side-nav__icon bx--side-nav__icon--small"
+               >
+                  <w-base-icon name={it.icon}></w-base-icon>
+               </div>
+               <span if:false={it.icon} class="bx--side-nav__link-text">
+                  {it.label}
+               </span>
+            </a>
+         </li>
+      </template>
+   </ul>
+</template>

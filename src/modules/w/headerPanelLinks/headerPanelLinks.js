@@ -4,14 +4,14 @@ import { synchronizeAttrs, normalizeBoolean } from 'w/utils';
 export default class HeaderNav extends LightningElement {
   @api items = [
     {
-      label: 'link 1',
+      label: 'switcher link 1',
       href: '#',
       get type() {
         return true;
       }
     },
     {
-      label: 'link 2',
+      label: 'switcher link 2',
       href: '#'
     },
     {
@@ -34,11 +34,11 @@ export default class HeaderNav extends LightningElement {
       ]
     },
     {
-      label: 'link 3',
+      label: 'switcher link 3',
       href: '#'
     },
     {
-      label: 'link 4',
+      label: 'switcher link 4',
       href: '#'
     },
     {
@@ -47,7 +47,7 @@ export default class HeaderNav extends LightningElement {
       expanded: false,
       items: [
         {
-          label: 'link 1',
+          label: 'switcher link 1',
           href: '#'
         },
         {
